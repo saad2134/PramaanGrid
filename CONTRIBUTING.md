@@ -30,7 +30,7 @@ All contributors and participants are expected to adhere to our [Code of Conduct
 
 ### 2. Fork and Clone
 ```bash
-git clone https://github.com/reachsaad/PramaanGrid.git
+git clone https://github.com/saad2134/PramaanGrid.git
 cd PramaanGrid
 ```
 

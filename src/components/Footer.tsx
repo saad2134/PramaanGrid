@@ -66,7 +66,7 @@ export default function Footer() {
         },
         {
           text: 'GitHub Repository',
-          href: 'https://github.com/saad2134/pramaan-grid',
+          href: 'https://github.com/saad2134/PramaanGrid',
           isExternal: true,
           icon: (
             <svg className="w-3.5 h-3.5 text-emerald-400 shrink-0" fill="currentColor" viewBox="0 0 24 24">
@@ -125,7 +125,7 @@ export default function Footer() {
             <div className="flex items-center gap-2.5 mt-5">
               <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl border border-white/[0.08] bg-white/[0.02] shadow-sm hover:border-emerald-500/40 transition-colors">
                 <a
-                  href="https://github.com/saad2134/pramaan-grid"
+                  href="https://github.com/saad2134/PramaanGrid"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="p-1 text-zinc-400 hover:text-white transition-colors"

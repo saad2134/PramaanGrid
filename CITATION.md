@@ -9,7 +9,7 @@ If you use PramaanGrid in academic research, municipal policy reports, urban gov
   author = {Saad},
   title = {PramaanGrid: Algorithmic Proof-of-Clearance and Anti-Fraud Escrow Protocol for Indian Municipalities},
   year = {2026},
-  url = {https://github.com/reachsaad/PramaanGrid},
+  url = {https://github.com/saad2134/PramaanGrid},
   license = {GPL-3.0},
   note = {Municipal civic escrow, VLM bi-temporal landmark verification, and zero-knowledge geo-audit infrastructure}
 }
@@ -17,11 +17,11 @@ If you use PramaanGrid in academic research, municipal policy reports, urban gov
 
 ## APA Citation Format
 
-> Saad. (2026). *PramaanGrid: Algorithmic Proof-of-Clearance and Anti-Fraud Escrow Protocol for Indian Municipalities* (Version 1.0.0) [Computer software]. https://github.com/reachsaad/PramaanGrid
+> Saad. (2026). *PramaanGrid: Algorithmic Proof-of-Clearance and Anti-Fraud Escrow Protocol for Indian Municipalities* (Version 1.0.0) [Computer software]. https://github.com/saad2134/PramaanGrid
 
 ## Chicago Citation Format
 
-> Saad. "PramaanGrid: Algorithmic Proof-of-Clearance and Anti-Fraud Escrow Protocol for Indian Municipalities." 2026. Distributed under GNU General Public License v3.0. https://github.com/reachsaad/PramaanGrid.
+> Saad. "PramaanGrid: Algorithmic Proof-of-Clearance and Anti-Fraud Escrow Protocol for Indian Municipalities." 2026. Distributed under GNU General Public License v3.0. https://github.com/saad2134/PramaanGrid.
 
 ## Research Areas & Core Concepts
 
@@ -36,4 +36,4 @@ When referencing specific architectural subsystems of PramaanGrid, please consid
 
 For research collaborations, municipal pilot deployments, or civic technology partnerships, please reach out to:
 - Email: [reach.saad@outlook.com](mailto:reach.saad@outlook.com)
-- Project Repository: [https://github.com/reachsaad/PramaanGrid](https://github.com/reachsaad/PramaanGrid)
+- Project Repository: [https://github.com/saad2134/PramaanGrid](https://github.com/saad2134/PramaanGrid)

@@ -124,8 +124,8 @@ flowchart TD
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/saad2134/pramaan-grid.git
-cd pramaan-grid
+git clone https://github.com/saad2134/PramaanGrid.git
+cd PramaanGrid
 ```
 
 ### 2. Install dependencies
