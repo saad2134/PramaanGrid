@@ -1,0 +1,48 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: pramaangrid-app
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - DEMO_MODE=true
+      - NEXT_PUBLIC_APP_URL=http://localhost:3000
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - pramaan-network
+
+  db:
+    image: postgis/postgis:16-3.4-alpine
+    container_name: pramaangrid-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: pramaangrid
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: pramaan_secure_password_2026
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgis_data:/var/lib/postgresql/data
+      - ./schema.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d pramaangrid"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - pramaan-network
+
+networks:
+  pramaan-network:
+    driver: bridge
+
+volumes:
+  postgis_data:
+    driver: local

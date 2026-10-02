@@ -2,10 +2,34 @@ import { NextRequest, NextResponse } from 'next/server';
 import { store } from '@/lib/store';
 import { evaluateGpsMatch } from '@/lib/haversine';
 import { verifyProofOfClearance } from '@/lib/gemini';
+import { computePerceptualHash, isDuplicateImage } from '@/lib/phash';
+import { checkRateLimit } from '@/lib/rate-limit';
 import { ClearanceProof, VerificationStatus } from '@/types';
+
+const MAX_BASE64_LENGTH = 14 * 1024 * 1024; // ~10MB
 
 export async function POST(request: NextRequest) {
   try {
+    // 1. Rate Limiting Check (25 requests / min per IP)
+    const rateLimit = checkRateLimit(request, 'verify-clearance', { limit: 25, windowMs: 60 * 1000 });
+    if (!rateLimit.allowed) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: 'Rate limit exceeded. Too many verification requests submitted.',
+          retryAfterMs: Math.max(0, rateLimit.resetAt - Date.now()),
+        },
+        {
+          status: 429,
+          headers: {
+            'Retry-After': String(Math.ceil((rateLimit.resetAt - Date.now()) / 1000)),
+            'X-RateLimit-Limit': String(rateLimit.limit),
+            'X-RateLimit-Remaining': '0',
+          },
+        }
+      );
+    }
+
     const body = await request.json();
     const {
       reportId,
@@ -42,7 +66,15 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // 1. Geodetic Audit (Haversine Formula)
+    // 2. Payload Size Validation Guard
+    if (typeof effectiveAfterImage === 'string' && effectiveAfterImage.length > MAX_BASE64_LENGTH) {
+      return NextResponse.json(
+        { success: false, error: 'Submitted photo payload exceeds 10MB limit' },
+        { status: 413 }
+      );
+    }
+
+    // 3. Geodetic Audit (Haversine Formula) & Coordinate Bounds Check
     const submittedLat = Number(afterLat ?? report.lat);
     const submittedLng = Number(afterLng ?? report.lng);
 
@@ -67,7 +99,27 @@ export async function POST(request: NextRequest) {
       submittedLng
     );
 
-    // 2. Multimodal VLM Forensic Audit (Gemini)
+    // 4. Perceptual Hashing (pHash) Duplicate Detection
+    let isIdenticalBeforePhoto = false;
+    let phashComparisonMessage = '';
+    try {
+      const [hashBefore, hashAfter] = await Promise.all([
+        computePerceptualHash(report.original_image_url),
+        computePerceptualHash(effectiveAfterImage),
+      ]);
+
+      if (hashBefore && hashAfter) {
+        const dupCheck = isDuplicateImage(hashBefore, hashAfter, 4);
+        if (dupCheck.isDuplicate || effectiveAfterImage === report.original_image_url) {
+          isIdenticalBeforePhoto = true;
+          phashComparisonMessage = `Duplicate photo recycling detected (${dupCheck.similarityPercent}% perceptual match with uncleaned blackspot).`;
+        }
+      }
+    } catch (phashErr) {
+      console.warn('Perceptual hash comparison warning:', phashErr);
+    }
+
+    // 5. Multimodal VLM Forensic Audit (Gemini)
     const vlmResult = await verifyProofOfClearance(
       report.original_image_url,
       effectiveAfterImage,
@@ -76,17 +128,22 @@ export async function POST(request: NextRequest) {
         lat: report.lat,
         lng: report.lng,
         reportId: report.id,
-        isFraud: !gpsResult.isMatch,
+        isFraud: !gpsResult.isMatch || isIdenticalBeforePhoto,
       }
     );
 
-    // 3. Synthesis & Fraud Decision Tree
+    // 6. Synthesis & Fraud Decision Tree
     let status: VerificationStatus = 'VERIFIED';
     let isVerified = true;
     let reason = '';
     let payoutStatus: 'AUTHORIZED' | 'HELD_FRAUD' = 'AUTHORIZED';
 
-    if (!gpsResult.isMatch && gpsResult.status === 'GPS_MISMATCH_FRAUD') {
+    if (isIdenticalBeforePhoto) {
+      status = 'FRAUD_LANDMARK_MISMATCH';
+      isVerified = false;
+      payoutStatus = 'HELD_FRAUD';
+      reason = `FRAUD DETECTED [PHOTO RECYCLING]: ${phashComparisonMessage} Contractor re-submitted original uncleaned photo.`;
+    } else if (!gpsResult.isMatch && gpsResult.status === 'GPS_MISMATCH_FRAUD') {
       status = 'FRAUD_GPS_MISMATCH';
       isVerified = false;
       payoutStatus = 'HELD_FRAUD';
@@ -107,7 +164,7 @@ export async function POST(request: NextRequest) {
       ? vlmResult.landmarkMatches
       : vlmResult.landmarkMatches.map((lm) => ({ ...lm, matched: false }));
 
-    // 4. Record Clearance Proof
+    // 7. Record Clearance Proof
     const proof: ClearanceProof = {
       id: `PRF-${Date.now().toString().slice(-6)}`,
       report_id: reportId,
@@ -131,15 +188,23 @@ export async function POST(request: NextRequest) {
 
     store.addProof(proof);
 
-    return NextResponse.json({
-      success: true,
-      data: {
-        proof,
-        report: store.getReportById(reportId),
-        gpsResult,
-        vlmResult,
+    return NextResponse.json(
+      {
+        success: true,
+        data: {
+          proof,
+          report: store.getReportById(reportId),
+          gpsResult,
+          vlmResult,
+        },
       },
-    });
+      {
+        headers: {
+          'X-RateLimit-Limit': String(rateLimit.limit),
+          'X-RateLimit-Remaining': String(rateLimit.remaining),
+        },
+      }
+    );
   } catch (error) {
     console.error('Error verifying clearance proof:', error);
     return NextResponse.json(
