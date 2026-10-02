@@ -16,8 +16,8 @@ export const INITIAL_REPORTS: Report[] = [
     phone_hash: '9198480*****',
     original_image_url: '/demo/banjara-dump.jpg',
     ai_clean_image_url: '/demo/banjara-clean.jpg',
-    lat: 17.4156,
-    lng: 78.4358,
+    lat: 17.4108,
+    lng: 78.4373,
     address: 'Near MLA Colony, Road No. 12, Banjara Hills',
     ward: 'Ward 98 - Jubilee Hills',
     city: 'Hyderabad',
@@ -52,8 +52,8 @@ export const INITIAL_REPORTS: Report[] = [
     phone_hash: '9194401*****',
     original_image_url: '/demo/charminar-dump.jpg',
     ai_clean_image_url: '/demo/charminar-clean.jpg',
-    lat: 17.3616,
-    lng: 78.4747,
+    lat: 17.3612,
+    lng: 78.4738,
     address: 'Near Mecca Masjid Arch, Laad Bazaar',
     ward: 'Ward 74 - Charminar',
     city: 'Hyderabad',
@@ -87,8 +87,8 @@ export const INITIAL_REPORTS: Report[] = [
     phone_hash: '9198860*****',
     original_image_url: '/demo/drain-choked.jpg',
     ai_clean_image_url: '/demo/drain-clean.jpg',
-    lat: 12.9719,
-    lng: 77.6412,
+    lat: 12.9734,
+    lng: 77.6415,
     address: 'Opp. BDA Complex, 100 Feet Road, Indiranagar',
     ward: 'Ward 112 - Domlur',
     city: 'Bengaluru',
@@ -120,8 +120,8 @@ export const INITIAL_REPORTS: Report[] = [
       'https://images.unsplash.com/photo-1595278069441-2cf29f8005a4?auto=format&fit=crop&w=900&q=80',
     ai_clean_image_url:
       'https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=900&q=80',
-    lat: 12.9352,
-    lng: 77.6772,
+    lat: 12.9261,
+    lng: 77.6758,
     address: 'Stormwater Culvert #4, Outer Ring Road, Bellandur',
     ward: 'Ward 150 - Bellandur',
     city: 'Bengaluru',
@@ -155,8 +155,8 @@ export const INITIAL_REPORTS: Report[] = [
     phone_hash: '9198110*****',
     original_image_url: '/demo/lajpat-dump.jpg',
     ai_clean_image_url: '/demo/lajpat-clean.jpg',
-    lat: 28.5672,
-    lng: 77.2433,
+    lat: 28.5681,
+    lng: 77.2417,
     address: 'Block-D Market Perimeter, Lajpat Nagar Central Market',
     ward: 'Ward 58 - Lajpat Nagar',
     city: 'Delhi',
@@ -197,14 +197,14 @@ export const INITIAL_CLEARANCE_PROOFS: ClearanceProof[] = [
     worker_id: 'WRK-5120',
     worker_name: 'Mohd. Ismail Qureshi',
     contractor_name: 'Charminar Heritage Waste Services',
-    lat: 17.36164, // 5.2 meters offset
-    lng: 78.47473,
+    lat: 17.36124, // 4.8 meters offset
+    lng: 78.47383,
     photo_timestamp: new Date(Date.now() - 2 * 3600 * 1000).toISOString(),
-    gps_distance_meters: 5.2,
+    gps_distance_meters: 4.8,
     is_verified: true,
     verification_status: 'VERIFIED',
     verification_reason:
-      'GPS coordinates match within 5.2m. Gemini VLM confirmed structural anchors (historic Charminar arch, Mecca Masjid masonry, yellow-black kerb). 100% commercial packaging removal verified.',
+      'GPS coordinates match within 4.8m. Gemini VLM confirmed structural anchors (historic Charminar arch, Mecca Masjid masonry, yellow-black kerb). 100% commercial packaging removal verified.',
     vlm_confidence: 0.99,
     landmark_matches: [
       {
@@ -238,14 +238,14 @@ export const INITIAL_CLEARANCE_PROOFS: ClearanceProof[] = [
     worker_id: 'WRK-3094',
     worker_name: 'Sukhvinder Pal Singh',
     contractor_name: 'Capital Municipal Concessionaire Ltd',
-    lat: 28.56722, // 4.8 meters offset
-    lng: 77.24335,
+    lat: 28.56813, // 4.3 meters offset
+    lng: 77.24174,
     photo_timestamp: new Date(Date.now() - 6 * 3600 * 1000).toISOString(),
-    gps_distance_meters: 4.8,
+    gps_distance_meters: 4.3,
     is_verified: true,
     verification_status: 'VERIFIED',
     verification_reason:
-      'GPS coordinates match within 4.8m. Gemini VLM verified market retail storefront signage (Sharma General Store, Gupta Cloth House) and curbside geometry. Complete organic waste evacuation verified.',
+      'GPS coordinates match within 4.3m. Gemini VLM verified market retail storefront signage (Sharma General Store, Gupta Cloth House) and curbside geometry. Complete organic waste evacuation verified.',
     vlm_confidence: 0.98,
     landmark_matches: [
       {
@@ -279,14 +279,14 @@ export const INITIAL_CLEARANCE_PROOFS: ClearanceProof[] = [
     worker_id: 'WRK-8821',
     worker_name: 'Rameshwarappa Gowda',
     contractor_name: 'Swachh Bengaluru Solutions',
-    lat: 12.97193, // Only 7 meters offset!
-    lng: 77.64124,
+    lat: 12.97344, // 5.1 meters offset
+    lng: 77.64155,
     photo_timestamp: new Date(Date.now() - 4 * 3600 * 1000).toISOString(),
-    gps_distance_meters: 6.8,
+    gps_distance_meters: 5.1,
     is_verified: true,
     verification_status: 'VERIFIED',
     verification_reason:
-      'GPS coordinates match within 6.8m. VLM confirmed 3 structural anchors (compound wall, curb, storm drain grate). Complete debris evacuation verified.',
+      'GPS coordinates match within 5.1m. VLM confirmed 3 structural anchors (compound wall, curb, storm drain grate). Complete debris evacuation verified.',
     vlm_confidence: 0.98,
     landmark_matches: [
       {
@@ -321,7 +321,7 @@ export const INITIAL_CLEARANCE_PROOFS: ClearanceProof[] = [
     worker_id: 'WRK-4109',
     worker_name: 'Vikram Singh (Apex Eco)',
     contractor_name: 'Apex Eco-Logistics Infra LLP',
-    lat: 12.9082, // 3,420 meters away!
+    lat: 12.8982, // 3,420 meters away!
     lng: 77.6521,
     photo_timestamp: new Date(Date.now() - 2 * 3600 * 1000).toISOString(),
     gps_distance_meters: 3420,
@@ -357,8 +357,8 @@ export const INITIAL_WHATSAPP_MESSAGES: WhatsAppMessage[] = [
     text: 'Namaste. There is a huge garbage dump here for 3 days blocking our street drain near Road 12 Banjara Hills.',
     imageUrl: '/demo/banjara-dump.jpg',
     location: {
-      lat: 17.4156,
-      lng: 78.4358,
+      lat: 17.4108,
+      lng: 78.4373,
       name: 'Road No. 12, Banjara Hills, Hyderabad',
     },
     timestamp: '10:14 AM',

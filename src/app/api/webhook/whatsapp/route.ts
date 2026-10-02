@@ -17,8 +17,8 @@ export async function POST(request: NextRequest) {
     const latitude = formData.get('Latitude') as string;
     const longitude = formData.get('Longitude') as string;
 
-    const lat = latitude ? parseFloat(latitude) : 17.4156;
-    const lng = longitude ? parseFloat(longitude) : 78.4358;
+    const lat = latitude ? parseFloat(latitude) : 17.4108;
+    const lng = longitude ? parseFloat(longitude) : 78.4373;
 
     // Immediate Twilio acknowledgement XML
     let replyMessage = '';
