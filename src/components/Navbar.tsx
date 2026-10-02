@@ -14,13 +14,13 @@ export default function Navbar({ onResetDemo, isResetting }: NavbarProps) {
   return (
     <header className="sticky top-0 z-50 w-full border-b border-white/[0.07] bg-[#07090c]/85 backdrop-blur-xl">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-        {/* Brand with Official Squircle Icon */}
+        {/* Brand with Clean Squircle Icon (No border) */}
         <Link href="/" className="flex items-center gap-3.5 group">
-          <div className="relative flex h-10 w-10 shrink-0 items-center justify-center squircle bg-emerald-950/40 p-0.5 group-hover:scale-105 transition-all">
+          <div className="relative flex h-10 w-10 shrink-0 items-center justify-center group-hover:scale-105 transition-transform">
             <img
               src="/icon.png"
               alt="PramaanGrid Official Emblem"
-              className="h-full w-full object-cover rounded-[22%]"
+              className="h-full w-full object-contain rounded-2xl"
             />
           </div>
           <div>

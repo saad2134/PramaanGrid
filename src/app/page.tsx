@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import TopBanner from '@/components/TopBanner';
 import Navbar from '@/components/Navbar';
 import StatsBanner from '@/components/StatsBanner';
 import WhatsAppSimulator from '@/components/WhatsAppSimulator';
@@ -11,10 +12,10 @@ import Footer from '@/components/Footer';
 import { BentoGrid } from '@/components/BentoGrid';
 import { HeroParticles } from '@/components/ui/HeroParticles';
 import { MockupFrame } from '@/components/ui/MockupFrame';
+import { BorderBeam } from '@/components/ui/BorderBeam';
 import {
   ShieldCheck,
   ShieldAlert,
-  Sparkles,
   Smartphone,
   MapPin,
   Scale,
@@ -22,6 +23,9 @@ import {
   Lock,
   ArrowUpRight,
   CheckCircle2,
+  AlertOctagon,
+  Radar,
+  Sparkles,
 } from 'lucide-react';
 import { Report, CivicMetrics } from '@/types';
 import { INITIAL_METRICS, INITIAL_REPORTS } from '@/lib/demo-data';
@@ -33,6 +37,9 @@ export default function Home() {
   const [activeTab, setActiveTab] = useState<'simulator' | 'verifier' | 'map' | 'architecture'>('simulator');
   const [isRtiModalOpen, setIsRtiModalOpen] = useState(false);
   const [isResetting, setIsResetting] = useState(false);
+
+  // Right-hand hero preview interactive toggle state
+  const [heroAuditMode, setHeroAuditMode] = useState<'legit' | 'fraud'>('legit');
 
   // Fetch live reports & metrics from API
   const refreshData = async () => {
@@ -64,79 +71,253 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-[#07090c] text-zinc-100 flex flex-col selection:bg-emerald-500 selection:text-black">
+      {/* 1. TOP ANNOUNCEMENT BANNER (Hackathon & Tracks) */}
+      <TopBanner />
+
+      {/* 2. STICKY NAVBAR */}
       <Navbar onResetDemo={handleResetDemo} isResetting={isResetting} />
 
       <main className="flex-1">
         {/* ============================================================
-            HERO SECTION — Attenomy & SIH2025 Inspired Polish
+            HERO SECTION — Left/Right High-Impact Layout
             ============================================================ */}
-        <section className="relative overflow-hidden pt-14 pb-20 border-b border-white/[0.06] bg-mesh-dark">
-          {/* Animated Ambient Particles (from Attenomy design) */}
-          <HeroParticles particleCount={45} />
+        <section className="relative overflow-hidden pt-12 pb-16 lg:py-20 border-b border-white/[0.06] bg-mesh-dark">
+          {/* Animated Ambient Particles (inspired by Attenomy) */}
+          <HeroParticles particleCount={40} />
 
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
-            <div className="flex flex-col items-center text-center">
-              {/* Official Squircle Brand Crest with Aura */}
-              <div className="relative mb-6 flex items-center justify-center group">
-                <div className="absolute -inset-1 rounded-[26%] bg-gradient-to-r from-emerald-500/30 to-cyan-500/30 blur-xl opacity-60 group-hover:opacity-100 transition duration-500" />
-                <div className="relative h-20 w-20 squircle bg-emerald-950/70 p-1 shadow-2xl ring-1 ring-white/20 transition-transform duration-300 group-hover:scale-105">
-                  <img
-                    src="/icon.png"
-                    alt="PramaanGrid Official Emblem"
-                    className="h-full w-full object-cover rounded-[22%]"
-                  />
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+              {/* LEFT COLUMN: Editorial & Value Proposition */}
+              <div className="lg:col-span-7 flex flex-col items-start text-left">
+                {/* Pilot Status Badge */}
+                <div className="inline-flex items-center gap-2 rounded-full bg-white/[0.04] border border-white/[0.08] px-3.5 py-1 text-xs text-zinc-300 mb-5 shadow-sm">
+                  <span className="relative flex h-2 w-2">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+                  </span>
+                  <span className="font-mono text-[11px] font-bold text-emerald-400">LIVE PROTOCOL</span>
+                  <span className="text-zinc-600">•</span>
+                  <span className="text-zinc-300">Municipal Anti-Fraud Grid</span>
+                </div>
+
+                {/* Main Headline */}
+                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white leading-[1.08]">
+                  PramaanGrid <span className="text-emerald-400 font-serif italic font-normal block sm:inline">(प्रमाण-ग्रिड)</span>
+                </h1>
+
+                {/* Sub-headline */}
+                <p className="mt-3.5 text-lg sm:text-xl lg:text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white via-zinc-200 to-zinc-400 tracking-tight">
+                  The Anti-Fraud Proof-of-Clearance Protocol for Civic Operations
+                </p>
+
+                {/* Grounded Domain Reality */}
+                <p className="mt-4 text-xs sm:text-sm text-zinc-400 leading-relaxed max-w-xl">
+                  India produces 150,000 tonnes of municipal waste daily, yet 40% remains uncollected while urban local bodies bleed ₹500+ Cr on ghost contracts and fake cleanups.
+                  <span className="text-zinc-200 font-medium block mt-2">
+                    PramaanGrid stops contractor fraud with algorithmic accountability: zero app download via WhatsApp, instant GenAI &quot;Vision of Tomorrow&quot;, and mathematical Proof-of-Clearance that keeps municipal funds safe in escrow.
+                  </span>
+                </p>
+
+                {/* Call-to-Action Buttons */}
+                <div className="mt-8 flex flex-wrap items-center gap-3.5 w-full sm:w-auto">
+                  <button
+                    onClick={() => setActiveTab('simulator')}
+                    className="flex items-center justify-center gap-2 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-black px-6 py-3 text-xs sm:text-sm font-bold shadow-lg shadow-emerald-500/25 transition-all hover:scale-[1.02] active:scale-[0.98]"
+                  >
+                    <Smartphone className="h-4 w-4" />
+                    <span>Launch WhatsApp Simulator</span>
+                  </button>
+
+                  <button
+                    onClick={() => setActiveTab('verifier')}
+                    className="flex items-center justify-center gap-2 rounded-xl bg-white/[0.06] hover:bg-white/[0.1] text-white border border-white/[0.12] px-6 py-3 text-xs sm:text-sm font-semibold transition-all hover:scale-[1.02] active:scale-[0.98]"
+                  >
+                    <ShieldAlert className="h-4 w-4 text-rose-400" />
+                    <span>Test Fraud Interception</span>
+                  </button>
+
+                  <a
+                    href="/dashboard"
+                    className="flex items-center justify-center gap-1.5 rounded-xl bg-transparent hover:bg-white/[0.05] text-zinc-400 hover:text-white px-4 py-3 text-xs sm:text-sm font-medium transition-colors"
+                  >
+                    <span>Command Center</span>
+                    <ArrowUpRight className="h-3.5 w-3.5 text-zinc-500" />
+                  </a>
+                </div>
+
+                {/* Live Trust Metrics Row */}
+                <div className="mt-8 pt-6 border-t border-white/[0.08] grid grid-cols-3 gap-4 w-full max-w-lg">
+                  <div>
+                    <span className="text-xl sm:text-2xl font-black text-white font-mono block">
+                      ₹{(metrics.taxpayer_money_saved_inr / 100000).toFixed(2)}L
+                    </span>
+                    <span className="text-[11px] text-zinc-400 font-medium">Funds Protected</span>
+                  </div>
+                  <div>
+                    <span className="text-xl sm:text-2xl font-black text-rose-400 font-mono block">
+                      {metrics.fraud_blocked_count}
+                    </span>
+                    <span className="text-[11px] text-zinc-400 font-medium">Frauds Blocked</span>
+                  </div>
+                  <div>
+                    <span className="text-xl sm:text-2xl font-black text-emerald-400 font-mono block">
+                      12 Hours
+                    </span>
+                    <span className="text-[11px] text-zinc-400 font-medium">Statutory SLA</span>
+                  </div>
                 </div>
               </div>
 
-              {/* Hackathon Track Tag */}
-              <div className="inline-flex items-center gap-2 rounded-full bg-emerald-500/[0.08] border border-emerald-500/25 px-4 py-1.5 text-xs font-semibold text-emerald-400 mb-6 shadow-sm">
-                <Sparkles className="h-3.5 w-3.5" />
-                <span>AI First Product Builder Hackathon 2026</span>
-                <span className="h-1 w-1 rounded-full bg-emerald-400" />
-                <span className="text-zinc-300 font-normal">Tracks 01, 02 &amp; 04</span>
-              </div>
+              {/* RIGHT COLUMN: Interactive Live Forensic Audit Card */}
+              <div className="lg:col-span-5 relative">
+                <div className="relative rounded-3xl overflow-hidden glass-panel border border-white/[0.12] shadow-2xl p-5">
+                  {/* Card Header Bar */}
+                  <div className="flex items-center justify-between pb-3.5 border-b border-white/[0.08]">
+                    <div className="flex items-center gap-2">
+                      <div className="flex h-2.5 w-2.5 rounded-full bg-emerald-400 animate-pulse" />
+                      <span className="text-xs font-mono font-bold text-white tracking-tight">
+                        LIVE FORENSIC AUDIT
+                      </span>
+                    </div>
 
-              {/* Editorial Title & Subtitle */}
-              <h1 className="text-4xl sm:text-5xl lg:text-7xl font-black tracking-tight text-white max-w-4xl leading-[1.08]">
-                PramaanGrid <span className="text-emerald-400 font-serif italic font-normal">(प्रमाण-ग्रिड)</span>
-              </h1>
-              <p className="mt-4 text-lg sm:text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-white via-zinc-200 to-zinc-400 tracking-tight max-w-3xl">
-                The Anti-Fraud Proof-of-Clearance Protocol for Civic Operations
-              </p>
+                    {/* Mode Toggle inside the preview */}
+                    <div className="flex rounded-lg bg-black/40 p-0.5 border border-white/[0.08] text-[10px]">
+                      <button
+                        onClick={() => setHeroAuditMode('legit')}
+                        className={`px-2 py-1 rounded-md font-semibold transition-colors ${
+                          heroAuditMode === 'legit'
+                            ? 'bg-emerald-600 text-white shadow-sm'
+                            : 'text-zinc-400 hover:text-white'
+                        }`}
+                      >
+                        Valid Cleanup
+                      </button>
+                      <button
+                        onClick={() => setHeroAuditMode('fraud')}
+                        className={`px-2 py-1 rounded-md font-semibold transition-colors ${
+                          heroAuditMode === 'fraud'
+                            ? 'bg-rose-600 text-white shadow-sm'
+                            : 'text-zinc-400 hover:text-white'
+                        }`}
+                      >
+                        Fraud Attempt
+                      </button>
+                    </div>
+                  </div>
 
-              {/* Grounded Domain Reality Statement */}
-              <p className="mt-4 text-xs sm:text-sm text-zinc-400 max-w-2xl leading-relaxed">
-                India generates 150,000 tonnes of municipal waste daily, yet 40% remains uncollected while urban local bodies bleed ₹500+ Cr on ghost contracts and fake cleanups.
-                <span className="text-zinc-200 font-medium block mt-1.5">
-                  PramaanGrid stops contractor fraud with algorithmic accountability: zero-friction citizen WhatsApp ingestion, instant GenAI &quot;Vision of Tomorrow&quot;, and mathematical Proof-of-Clearance that keeps municipal funds safe in escrow.
-                </span>
-              </p>
+                  {/* Split Visual: Before vs After */}
+                  <div className="grid grid-cols-2 gap-3 mt-4">
+                    {/* Before Image */}
+                    <div className="rounded-xl overflow-hidden border border-white/[0.08] bg-black">
+                      <div className="bg-zinc-900/90 px-2.5 py-1 text-[10px] font-semibold text-amber-400 flex items-center justify-between">
+                        <span>BEFORE (Citizen)</span>
+                        <span className="text-[9px] text-zinc-500 font-mono">10:14 AM</span>
+                      </div>
+                      <img
+                        src="https://images.unsplash.com/photo-1605600659873-d808a13e4d2a?auto=format&fit=crop&w=600&q=80"
+                        alt="Before Cleanup"
+                        className="h-28 w-full object-cover"
+                      />
+                    </div>
 
-              {/* Action Buttons */}
-              <div className="mt-8 flex flex-wrap items-center justify-center gap-3.5">
-                <button
-                  onClick={() => setActiveTab('simulator')}
-                  className="flex items-center gap-2 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-black px-6 py-3 text-xs sm:text-sm font-bold shadow-lg shadow-emerald-500/25 transition-all hover:scale-[1.02] active:scale-[0.98]"
-                >
-                  <Smartphone className="h-4 w-4" />
-                  <span>Launch WhatsApp Simulator</span>
-                </button>
+                    {/* After Image */}
+                    <div className="rounded-xl overflow-hidden border border-white/[0.08] bg-black">
+                      <div
+                        className={`px-2.5 py-1 text-[10px] font-semibold flex items-center justify-between ${
+                          heroAuditMode === 'legit'
+                            ? 'bg-emerald-950/80 text-emerald-400'
+                            : 'bg-rose-950/80 text-rose-400'
+                        }`}
+                      >
+                        <span>AFTER (Contractor)</span>
+                        <span className="text-[9px] text-zinc-400 font-mono">
+                          {heroAuditMode === 'legit' ? '02:30 PM' : 'Remote Photo'}
+                        </span>
+                      </div>
+                      <img
+                        src={
+                          heroAuditMode === 'legit'
+                            ? 'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=600&q=80'
+                            : 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80'
+                        }
+                        alt="After Cleanup"
+                        className="h-28 w-full object-cover"
+                      />
+                    </div>
+                  </div>
 
-                <button
-                  onClick={() => setActiveTab('verifier')}
-                  className="flex items-center gap-2 rounded-xl bg-white/[0.06] hover:bg-white/[0.1] text-white border border-white/[0.12] px-6 py-3 text-xs sm:text-sm font-semibold transition-all hover:scale-[1.02] active:scale-[0.98]"
-                >
-                  <ShieldAlert className="h-4 w-4 text-rose-400" />
-                  <span>Test Fraud Interception</span>
-                </button>
+                  {/* Radar & Audit Metrics Breakdown */}
+                  <div className="mt-4 space-y-2.5 text-xs">
+                    {/* Geodetic Haversine Readout */}
+                    <div className="flex items-center justify-between p-2.5 rounded-xl bg-black/40 border border-white/[0.06]">
+                      <div className="flex items-center gap-2">
+                        <Radar className={`h-4 w-4 ${heroAuditMode === 'legit' ? 'text-emerald-400' : 'text-rose-400'}`} />
+                        <span className="text-[11px] text-zinc-300">Geodetic GPS Offset</span>
+                      </div>
+                      <span
+                        className={`font-mono font-bold text-xs ${
+                          heroAuditMode === 'legit' ? 'text-emerald-400' : 'text-rose-400'
+                        }`}
+                      >
+                        {heroAuditMode === 'legit' ? '6.8m (Within 35m)' : '3,420m (VIOLATION)'}
+                      </span>
+                    </div>
 
-                <a
-                  href="/dashboard"
-                  className="flex items-center gap-1.5 rounded-xl bg-transparent hover:bg-white/[0.05] text-zinc-400 hover:text-white px-5 py-3 text-xs sm:text-sm font-medium transition-colors"
-                >
-                  <span>Municipal Command Center</span>
-                  <ArrowUpRight className="h-3.5 w-3.5 text-zinc-500" />
-                </a>
+                    {/* VLM Structural Anchor Verification */}
+                    <div className="flex items-center justify-between p-2.5 rounded-xl bg-black/40 border border-white/[0.06]">
+                      <div className="flex items-center gap-2">
+                        <ShieldCheck className={`h-4 w-4 ${heroAuditMode === 'legit' ? 'text-cyan-400' : 'text-rose-400'}`} />
+                        <span className="text-[11px] text-zinc-300">VLM Landmark Alignment</span>
+                      </div>
+                      <span
+                        className={`font-semibold text-xs ${
+                          heroAuditMode === 'legit' ? 'text-cyan-300' : 'text-rose-400'
+                        }`}
+                      >
+                        {heroAuditMode === 'legit' ? '3/3 Structural Anchors' : '0/3 Anchors (Mismatch)'}
+                      </span>
+                    </div>
+
+                    {/* Escrow Status Outcome */}
+                    <div
+                      className={`p-3 rounded-xl border flex items-center justify-between ${
+                        heroAuditMode === 'legit'
+                          ? 'bg-emerald-950/25 border-emerald-500/40 text-emerald-200'
+                          : 'bg-rose-950/30 border-rose-500/40 text-rose-200'
+                      }`}
+                    >
+                      <div className="flex items-center gap-2">
+                        {heroAuditMode === 'legit' ? (
+                          <CheckCircle2 className="h-4 w-4 text-emerald-400 shrink-0" />
+                        ) : (
+                          <AlertOctagon className="h-4 w-4 text-rose-400 shrink-0" />
+                        )}
+                        <span className="font-bold text-[11px]">
+                          {heroAuditMode === 'legit'
+                            ? 'VERIFIED: Contractor Payout Released'
+                            : 'CRITICAL FRAUD: Payment Frozen'}
+                        </span>
+                      </div>
+
+                      <span
+                        className={`font-mono font-bold text-xs ${
+                          heroAuditMode === 'legit' ? 'text-emerald-400' : 'text-rose-400 line-through'
+                        }`}
+                      >
+                        {heroAuditMode === 'legit' ? '₹4,500' : '₹8,500'}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Traveling BorderBeam */}
+                  <BorderBeam
+                    size={140}
+                    duration={8}
+                    colorFrom={heroAuditMode === 'legit' ? '#10b981' : '#f43f5e'}
+                    colorTo={heroAuditMode === 'legit' ? '#06b6d4' : '#fb7185'}
+                    borderWidth={1.5}
+                  />
+                </div>
               </div>
             </div>
 
@@ -208,7 +389,7 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Device Mockup Wrapper with traveling BorderBeam (inspired by sih2025) */}
+          {/* Device Mockup Wrapper with traveling BorderBeam */}
           <MockupFrame
             url={`pramaangrid.gov.in/${activeTab}`}
             badge={
