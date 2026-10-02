@@ -1,12 +1,20 @@
 # 🏆 PramaanGrid (प्रमाण-ग्रिड) - The Civic Trust Protocol
 ### *The Anti-Fraud Proof-of-Clearance Protocol for Civic Operations*
 
+<p align="center">
+  <img src="./public/social-preview.png" alt="PramaanGrid Banner" width="640" style="max-width: 100%; border-radius: 8px;" />
+</p>
+
 [![Next.js 16](https://img.shields.io/badge/Next.js-16.3.8-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
 [![Tailwind CSS v4](https://img.shields.io/badge/Tailwind_CSS-v4.3.3-38B2AC?style=for-the-badge&logo=tailwind-css)](https://tailwindcss.com/)
 [![Google Gemini](https://img.shields.io/badge/Google_Gemini-3.5_Flash-4285F4?style=for-the-badge&logo=google)](https://ai.google.dev/)
 [![FLUX.1](https://img.shields.io/badge/FLUX.1_Fill-Inpainting-FF6B6B?style=for-the-badge)](https://replicate.com/)
 [![Supabase](https://img.shields.io/badge/Supabase-PostGIS-3ECF8E?style=for-the-badge&logo=supabase)](https://supabase.com/)
 [![License: GPL-3.0](https://img.shields.io/badge/License-GPL--3.0-emerald?style=for-the-badge)](./LICENSE)
+[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg?style=for-the-badge)](./CODE_OF_CONDUCT.md)
+[![Contributing](https://img.shields.io/badge/PRs-Welcome-brightgreen?style=for-the-badge)](./CONTRIBUTING.md)
+[![Security Policy](https://img.shields.io/badge/Security-Policy-blueviolet?style=for-the-badge)](./SECURITY.md)
+[![Citation](https://img.shields.io/badge/Cite-PramaanGrid-blue?style=for-the-badge)](./CITATION.md)
 
 > Built for the **AI First Product Builder Hackathon 2026** by college.dev & Wonksknow Technologies.  
 > **Theme**: *"Use AI to build a cleaner Bharat"*  
