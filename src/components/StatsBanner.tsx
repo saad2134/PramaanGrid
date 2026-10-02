@@ -14,13 +14,14 @@ export default function StatsBanner({ metrics }: StatsBannerProps) {
       {/* Section Header Label */}
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2">
-          <span className="flex h-2 w-2 rounded-full bg-emerald-400" />
+          <span className="flex h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
           <span className="text-xs font-mono font-bold uppercase tracking-wider text-zinc-300">
             Real-Time Municipal Escrow &amp; Audit Metrics
           </span>
         </div>
-        <span className="text-[11px] text-zinc-300 font-mono hidden sm:inline">
-          Statutory 12-Hour Citizen SLA Active
+        <span className="text-[11px] text-emerald-400 font-mono hidden sm:inline-flex items-center gap-1.5 rounded-full bg-emerald-500/10 px-2.5 py-0.5 border border-emerald-500/20">
+          <Clock className="h-3 w-3" />
+          <span>Statutory 12-Hour Citizen SLA Active</span>
         </span>
       </div>
 

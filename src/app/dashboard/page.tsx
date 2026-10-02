@@ -21,6 +21,8 @@ import {
   Scale,
   Sparkles,
   ExternalLink,
+  Maximize2,
+  Minimize2,
 } from 'lucide-react';
 import { Report, CivicMetrics, ReportStatus, ReportCategory, ClearanceProof } from '@/types';
 import { INITIAL_METRICS, INITIAL_REPORTS, INITIAL_CLEARANCE_PROOFS } from '@/lib/demo-data';
@@ -36,6 +38,34 @@ export default function DashboardPage() {
   const [searchQuery, setSearchQuery] = useState('');
   const [isRtiModalOpen, setIsRtiModalOpen] = useState(false);
   const [showProofDrawer, setShowProofDrawer] = useState(false);
+  const [isFullscreen, setIsFullscreen] = useState(false);
+  const dashboardRef = React.useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleFullscreenChange = () => {
+      setIsFullscreen(Boolean(document.fullscreenElement));
+    };
+    document.addEventListener('fullscreenchange', handleFullscreenChange);
+    return () => {
+      document.removeEventListener('fullscreenchange', handleFullscreenChange);
+    };
+  }, []);
+
+  const toggleFullscreen = async () => {
+    try {
+      if (!document.fullscreenElement) {
+        if (dashboardRef.current) {
+          await dashboardRef.current.requestFullscreen();
+        } else {
+          await document.documentElement.requestFullscreen();
+        }
+      } else {
+        await document.exitFullscreen();
+      }
+    } catch (err) {
+      console.error('Fullscreen toggle error:', err);
+    }
+  };
 
   const fetchReports = async () => {
     try {
@@ -74,26 +104,41 @@ export default function DashboardPage() {
   });
 
   return (
-    <div className="min-h-screen bg-[#09090b] text-zinc-100 flex flex-col">
-      <Navbar />
+    <div
+      ref={dashboardRef}
+      className={`min-h-screen bg-[#09090b] text-zinc-100 flex flex-col ${
+        isFullscreen ? 'h-screen overflow-y-auto w-full' : ''
+      }`}
+    >
+      {!isFullscreen && <Navbar />}
 
       {/* SUB-HEADER */}
-      <div className="border-b border-zinc-800 bg-zinc-950 px-4 sm:px-6 lg:px-8 py-4">
-        <div className="mx-auto max-w-7xl flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className="border-b border-zinc-800 bg-zinc-950/95 backdrop-blur-md px-4 sm:px-6 lg:px-8 py-3.5 sticky top-0 z-30 shadow-md">
+        <div
+          className={`mx-auto w-full flex flex-col lg:flex-row lg:items-center justify-between gap-4 ${
+            isFullscreen ? 'max-w-[1800px]' : 'max-w-7xl'
+          }`}
+        >
           <div className="flex items-center gap-3.5">
             <Link
               href="/"
               className="flex h-10 w-10 shrink-0 items-center justify-center squircle bg-emerald-950/40 border border-emerald-500/20 text-zinc-400 hover:text-white hover:scale-105 transition-all p-1"
-              title="Return to Studio"
+              title="Return to Citizen POV & WhatsApp Simulator"
             >
               <img src="/icon.png" alt="PramaanGrid" className="h-full w-full object-cover rounded-[22%]" />
             </Link>
             <div>
-              <h1 className="text-lg font-bold text-white flex items-center gap-2">
-                <span>Municipal Operations Command Center</span>
-                <span className="rounded-full bg-emerald-500/10 px-2 py-0.5 text-[10px] font-semibold text-emerald-400 border border-emerald-500/20">
+              <div className="flex items-center gap-2">
+                <span className="text-[10px] font-mono uppercase tracking-widest text-emerald-400 font-bold">
+                  PramaanGrid Protocol
+                </span>
+                <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                <span className="rounded-full bg-emerald-500/10 px-2 py-0.5 text-[9px] font-mono font-semibold text-emerald-400 border border-emerald-500/20">
                   Live Audit Feed
                 </span>
+              </div>
+              <h1 className="text-lg font-bold text-white flex items-center gap-2 mt-0.5">
+                <span>Municipal Operations Command Center</span>
               </h1>
               <p className="text-xs text-zinc-400">
                 DMAUD • Urban Local Bodies Smart Sanitation &amp; Anti-Fraud Grid
@@ -101,26 +146,73 @@ export default function DashboardPage() {
             </div>
           </div>
 
-          {/* Quick city tabs */}
-          <div className="flex items-center gap-1.5 self-start sm:self-auto rounded-xl bg-zinc-900 p-1 border border-zinc-800 text-xs">
-            {['ALL', 'Hyderabad', 'Bengaluru', 'Delhi'].map((c) => (
-              <button
-                key={c}
-                onClick={() => setCityFilter(c)}
-                className={`rounded-lg px-3 py-1 font-medium transition-colors ${
-                  cityFilter === c
-                    ? 'bg-emerald-600 text-white shadow-sm'
-                    : 'text-zinc-400 hover:text-white'
-                }`}
-              >
-                {c}
-              </button>
-            ))}
+          {/* Quick city tabs & Fullscreen Mode */}
+          <div className="flex flex-wrap items-center gap-2 self-start lg:self-auto">
+            <div className="flex items-center gap-1 rounded-xl bg-zinc-900 p-1 border border-zinc-800 text-xs">
+              {['ALL', 'Hyderabad', 'Bengaluru', 'Delhi'].map((c) => {
+                const count =
+                  c === 'ALL'
+                    ? reports.length
+                    : reports.filter((r) => r.city.toLowerCase() === c.toLowerCase()).length;
+                return (
+                  <button
+                    key={c}
+                    onClick={() => setCityFilter(c)}
+                    className={`flex items-center gap-1.5 rounded-lg px-2.5 py-1 font-medium transition-colors ${
+                      cityFilter === c
+                        ? 'bg-emerald-600 text-white shadow-sm'
+                        : 'text-zinc-400 hover:text-white'
+                    }`}
+                  >
+                    <span>{c}</span>
+                    <span
+                      className={`text-[9px] font-mono rounded px-1 py-0.2 ${
+                        cityFilter === c ? 'bg-black/30 text-emerald-200' : 'bg-zinc-800 text-zinc-500'
+                      }`}
+                    >
+                      {count}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+
+            <button
+              onClick={toggleFullscreen}
+              className={`flex items-center gap-1.5 rounded-xl px-3 py-1.5 text-xs font-semibold shadow-sm transition-all border ${
+                isFullscreen
+                  ? 'bg-amber-500/10 hover:bg-amber-500/20 text-amber-300 border-amber-500/40'
+                  : 'bg-zinc-900 hover:bg-zinc-800 text-zinc-300 hover:text-white border-zinc-700/80 hover:border-emerald-500/40'
+              }`}
+              title={isFullscreen ? 'Exit Full Screen mode (ESC)' : 'Enter Full Screen Command Center mode'}
+            >
+              {isFullscreen ? (
+                <>
+                  <Minimize2 className="h-3.5 w-3.5 text-amber-400" />
+                  <span>Exit Full Screen</span>
+                  <kbd className="ml-1 rounded bg-black/50 px-1.5 py-0.5 text-[9px] font-mono text-amber-300 border border-amber-500/30">
+                    ESC
+                  </kbd>
+                </>
+              ) : (
+                <>
+                  <Maximize2 className="h-3.5 w-3.5 text-emerald-400" />
+                  <span>Full Screen</span>
+                  <kbd className="ml-1 rounded bg-black/50 px-1.5 py-0.5 text-[9px] font-mono text-zinc-400 border border-zinc-800">
+                    HUD
+                  </kbd>
+                </>
+              )}
+            </button>
           </div>
         </div>
       </div>
 
-      <main className="flex-1 mx-auto max-w-7xl w-full px-4 sm:px-6 lg:px-8 py-6 space-y-6">
+      <main
+        className={`flex-1 mx-auto w-full px-4 sm:px-6 lg:px-8 py-6 space-y-6 ${
+          isFullscreen ? 'max-w-[1800px]' : 'max-w-7xl'
+        }`}
+      >
         {/* Top metrics summary */}
         <StatsBanner metrics={metrics} />
 

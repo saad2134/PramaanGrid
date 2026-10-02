@@ -346,28 +346,34 @@ export default function ProofVerifier({
               <span className="text-[11px] font-semibold text-zinc-400 block mb-1.5">
                 Structural Landmark Anchors:
               </span>
-              <div className="space-y-1.5">
+              <div className="flex flex-wrap items-center gap-2">
                 {currentProof.landmark_matches.map((lm, idx) => (
                   <div
                     key={idx}
-                    className="flex items-center justify-between rounded-md bg-black/30 px-2.5 py-1.5 text-[11px] border border-zinc-800/60"
+                    className={`inline-flex items-center gap-2 rounded-lg px-2.5 py-1.5 text-[11px] border transition-all ${
+                      lm.matched
+                        ? 'bg-emerald-950/40 border-emerald-500/30 text-emerald-100'
+                        : 'bg-rose-950/40 border-rose-500/30 text-rose-100'
+                    }`}
                   >
-                    <span className="text-zinc-300 font-medium">
+                    <span className="font-medium text-zinc-200">
                       {lm.landmark}
                     </span>
                     <span
-                      className={`flex items-center gap-1 font-semibold ${
-                        lm.matched ? 'text-emerald-400' : 'text-rose-400'
+                      className={`inline-flex items-center gap-1 font-semibold shrink-0 rounded px-1.5 py-0.5 text-[10px] ${
+                        lm.matched
+                          ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/40'
+                          : 'bg-rose-500/20 text-rose-400 border border-rose-500/40'
                       }`}
                     >
                       {lm.matched ? (
                         <>
-                          <CheckCircle2 className="h-3 w-3" />
+                          <CheckCircle2 className="h-3 w-3 shrink-0" />
                           <span>Matched</span>
                         </>
                       ) : (
                         <>
-                          <XCircle className="h-3 w-3" />
+                          <XCircle className="h-3 w-3 shrink-0" />
                           <span>Mismatch / Missing</span>
                         </>
                       )}

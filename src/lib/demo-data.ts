@@ -333,13 +333,19 @@ export const INITIAL_CLEARANCE_PROOFS: ClearanceProof[] = [
       {
         landmark: 'Concrete bridge abutment',
         before_pos: 'Visible in report',
-        after_pos: 'Missing entirely',
+        after_pos: 'Missing entirely in submitted photo',
         matched: false,
       },
       {
         landmark: 'Canal embankment stone pitching',
         before_pos: 'Present on both sides',
         after_pos: 'Sandy slope (unrelated site)',
+        matched: false,
+      },
+      {
+        landmark: 'Lake storm overflow sluice gate',
+        before_pos: 'Visible in background channel',
+        after_pos: 'Absent (photo captured at alternate remote site)',
         matched: false,
       },
     ],

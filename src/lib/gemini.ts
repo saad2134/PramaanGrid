@@ -272,7 +272,159 @@ function generateSimulatedProofOfClearance(
     after.includes('remote') ||
     (before === after);
 
+  const reportId = context.reportId || '';
+
   if (isFraud) {
+    if (reportId.includes('BLR-04')) {
+      return {
+        isClear: false,
+        vlmConfidence: 0.99,
+        landmarkMatches: [
+          {
+            landmark: 'Concrete bridge abutment',
+            before_pos: 'Foreground center (present in report)',
+            after_pos: 'Missing entirely in submitted photo',
+            matched: false,
+          },
+          {
+            landmark: 'Canal embankment stone pitching',
+            before_pos: 'Present on both canal banks in report',
+            after_pos: 'Unrelated private terrain (0% geometric correlation)',
+            matched: false,
+          },
+          {
+            landmark: 'Lake storm overflow sluice gate',
+            before_pos: 'Visible in background channel',
+            after_pos: 'Absent (photo captured at alternate remote site)',
+            matched: false,
+          },
+        ],
+        explanation:
+          'CRITICAL VLM AUDIT ALERT: Visual landmark triangulation detected 0% geometric correspondence with the Bellandur culvert blackspot. Photo appears to be captured at an alternate remote location. Payment frozen.',
+        fraudAlert: 'LANDMARK_MISMATCH_FRAUD: Contractor submitted photographic evidence from an unrelated remote site.',
+      };
+    }
+
+    if (reportId.includes('HYD-01')) {
+      return {
+        isClear: false,
+        vlmConfidence: 0.99,
+        landmarkMatches: [
+          {
+            landmark: 'Road No. 12 concrete culvert curb',
+            before_pos: 'Foreground center (present in report)',
+            after_pos: 'Missing entirely in submitted photo',
+            matched: false,
+          },
+          {
+            landmark: 'MLA Colony boundary wall masonry',
+            before_pos: 'Visible across horizon in report',
+            after_pos: 'Unrelated private terrain (0% geometric correlation)',
+            matched: false,
+          },
+          {
+            landmark: 'Roadside asphalt pavement edge',
+            before_pos: 'Right roadway margin',
+            after_pos: 'Absent (photo captured at alternate remote location)',
+            matched: false,
+          },
+        ],
+        explanation:
+          'CRITICAL VLM AUDIT ALERT: Visual landmark triangulation detected 0% geometric correspondence with the Banjara Hills blackspot. Photo appears to be captured at an alternate remote location. Payment frozen.',
+        fraudAlert: 'LANDMARK_MISMATCH_FRAUD: Contractor submitted photographic evidence from an unrelated remote site.',
+      };
+    }
+
+    if (reportId.includes('HYD-02')) {
+      return {
+        isClear: false,
+        vlmConfidence: 0.99,
+        landmarkMatches: [
+          {
+            landmark: 'Mecca Masjid outer gateway arch',
+            before_pos: 'Left background',
+            after_pos: 'Missing entirely in submitted photo',
+            matched: false,
+          },
+          {
+            landmark: 'Charminar minaret and central arch',
+            before_pos: 'Upper right background',
+            after_pos: 'Unrelated private terrain (0% geometric correlation)',
+            matched: false,
+          },
+          {
+            landmark: 'Yellow-black street curb line',
+            before_pos: 'Foreground edge',
+            after_pos: 'Absent (photo captured at alternate remote location)',
+            matched: false,
+          },
+        ],
+        explanation:
+          'CRITICAL VLM AUDIT ALERT: Visual landmark triangulation detected 0% geometric correspondence with the Charminar heritage zone. Photo appears to be captured at an alternate remote location. Payment frozen.',
+        fraudAlert: 'LANDMARK_MISMATCH_FRAUD: Contractor submitted photographic evidence from an unrelated remote site.',
+      };
+    }
+
+    if (reportId.includes('DEL-05')) {
+      return {
+        isClear: false,
+        vlmConfidence: 0.99,
+        landmarkMatches: [
+          {
+            landmark: 'Sharma General Store and Gupta Cloth House signboards',
+            before_pos: 'Upper left commercial facade',
+            after_pos: 'Missing entirely in submitted photo',
+            matched: false,
+          },
+          {
+            landmark: 'Galaxy Electronics and fresh fruit shop fascia',
+            before_pos: 'Center upper row',
+            after_pos: 'Unrelated private terrain (0% geometric correlation)',
+            matched: false,
+          },
+          {
+            landmark: 'Concrete market perimeter pedestrian curb',
+            before_pos: 'Lower left',
+            after_pos: 'Absent (photo captured at alternate remote location)',
+            matched: false,
+          },
+        ],
+        explanation:
+          'CRITICAL VLM AUDIT ALERT: Visual landmark triangulation detected 0% geometric correspondence with Lajpat Nagar market. Photo appears to be captured at an alternate remote location. Payment frozen.',
+        fraudAlert: 'LANDMARK_MISMATCH_FRAUD: Contractor submitted photographic evidence from an unrelated remote site.',
+      };
+    }
+
+    if (reportId.includes('BLR-03')) {
+      return {
+        isClear: false,
+        vlmConfidence: 0.99,
+        landmarkMatches: [
+          {
+            landmark: 'Yellow BDA boundary wall',
+            before_pos: 'Left background',
+            after_pos: 'Missing entirely in submitted photo',
+            matched: false,
+          },
+          {
+            landmark: 'Cast-iron drain grill',
+            before_pos: 'Center channel',
+            after_pos: 'Unrelated private terrain (0% geometric correlation)',
+            matched: false,
+          },
+          {
+            landmark: 'Sidewalk pavement kerb',
+            before_pos: 'Lower right edge',
+            after_pos: 'Absent (photo captured at alternate remote location)',
+            matched: false,
+          },
+        ],
+        explanation:
+          'CRITICAL VLM AUDIT ALERT: Visual landmark triangulation detected 0% geometric correspondence with Indiranagar drain blackspot. Photo appears to be captured at an alternate remote location. Payment frozen.',
+        fraudAlert: 'LANDMARK_MISMATCH_FRAUD: Contractor submitted photographic evidence from an unrelated remote site.',
+      };
+    }
+
     return {
       isClear: false,
       vlmConfidence: 0.99,
@@ -301,8 +453,6 @@ function generateSimulatedProofOfClearance(
       fraudAlert: 'LANDMARK_MISMATCH_FRAUD: Contractor submitted photographic evidence from an unrelated remote site.',
     };
   }
-
-  const reportId = context.reportId || '';
   if (reportId.includes('HYD-01')) {
     return {
       isClear: true,
@@ -410,6 +560,33 @@ function generateSimulatedProofOfClearance(
       ],
       explanation:
         'VLM confirmed 3 structural anchors (compound wall, curb, storm drain grate). Complete debris evacuation verified.',
+    };
+  } else if (reportId.includes('BLR-04')) {
+    return {
+      isClear: true,
+      vlmConfidence: 0.99,
+      landmarkMatches: [
+        {
+          landmark: 'Concrete bridge abutment',
+          before_pos: 'Foreground center (choked with multi-layer plastics)',
+          after_pos: 'Foreground center (100% dredged and unclogged)',
+          matched: true,
+        },
+        {
+          landmark: 'Canal embankment stone pitching',
+          before_pos: 'Present on both canal banks',
+          after_pos: 'Present on both canal banks (cleared of refuse)',
+          matched: true,
+        },
+        {
+          landmark: 'Lake storm overflow sluice gate',
+          before_pos: 'Visible in background channel',
+          after_pos: 'Visible in background channel (free water flow restored)',
+          matched: true,
+        },
+      ],
+      explanation:
+        'VLM confirmed geometric alignment with concrete bridge abutment and canal stone pitching. 100% of plastic bottleneck and sludge dredged. Waterway clear.',
     };
   }
 
