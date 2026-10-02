@@ -77,12 +77,13 @@ export default function DashboardPage() {
       {/* SUB-HEADER */}
       <div className="border-b border-zinc-800 bg-zinc-950 px-4 sm:px-6 lg:px-8 py-4">
         <div className="mx-auto max-w-7xl flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3.5">
             <Link
               href="/"
-              className="flex h-9 w-9 items-center justify-center rounded-xl bg-zinc-900 border border-zinc-800 text-zinc-400 hover:text-white transition-colors"
+              className="flex h-10 w-10 shrink-0 items-center justify-center squircle bg-emerald-950/40 border border-emerald-500/20 text-zinc-400 hover:text-white hover:scale-105 transition-all p-1"
+              title="Return to Studio"
             >
-              <ArrowLeft className="h-4 w-4" />
+              <img src="/icon.png" alt="PramaanGrid" className="h-full w-full object-cover rounded-[22%]" />
             </Link>
             <div>
               <h1 className="text-lg font-bold text-white flex items-center gap-2">
@@ -92,7 +93,7 @@ export default function DashboardPage() {
                 </span>
               </h1>
               <p className="text-xs text-zinc-400">
-                Department of Municipal Administration &amp; Urban Development (DMAUD)
+                DMAUD • Urban Local Bodies Smart Sanitation &amp; Anti-Fraud Grid
               </p>
             </div>
           </div>

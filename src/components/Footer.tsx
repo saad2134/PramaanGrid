@@ -7,9 +7,13 @@ export default function Footer() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           {/* Brand & Tagline */}
-          <div className="flex items-center gap-3">
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 font-bold">
-              <ShieldCheck className="h-5 w-5" />
+          <div className="flex items-center gap-3.5">
+            <div className="relative flex h-10 w-10 shrink-0 items-center justify-center squircle bg-emerald-950/40 p-0.5">
+              <img
+                src="/icon.png"
+                alt="PramaanGrid Logo"
+                className="h-full w-full object-cover rounded-[22%]"
+              />
             </div>
             <div>
               <p className="font-bold text-white text-sm">

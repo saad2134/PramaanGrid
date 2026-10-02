@@ -161,9 +161,13 @@ export default function WhatsAppSimulator({
       {/* WhatsApp Header */}
       <div className="flex items-center justify-between bg-[#202c33] px-4 py-3 border-b border-zinc-800 text-white">
         <div className="flex items-center gap-3">
-          <div className="relative flex h-10 w-10 items-center justify-center rounded-full bg-emerald-700 text-white font-bold text-sm">
-            <span>PG</span>
-            <span className="absolute bottom-0 right-0 h-3 w-3 rounded-full bg-emerald-400 border-2 border-[#202c33]" />
+          <div className="relative flex h-10 w-10 shrink-0 items-center justify-center squircle bg-emerald-950 p-0.5 shadow-md">
+            <img
+              src="/icon.png"
+              alt="Pramaan Bot Avatar"
+              className="h-full w-full object-cover rounded-[22%]"
+            />
+            <span className="absolute -bottom-0.5 -right-0.5 h-3 w-3 rounded-full bg-emerald-400 border-2 border-[#202c33]" />
           </div>
           <div>
             <h3 className="font-semibold text-sm flex items-center gap-1.5">
