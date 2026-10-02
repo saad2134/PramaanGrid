@@ -1,4 +1,4 @@
-# 🏆 Nagar-Drishti (नगर-दृष्टि) — City Vision
+# 🏆 PramaanGrid (प्रमाण-ग्रिड) — The Civic Trust Protocol
 ## *The Anti-Fraud Proof-of-Clearance Protocol for Civic Operations*
 
 > **AI First Product Builder Hackathon 2026** — Solve India's Garbage Problem

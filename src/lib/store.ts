@@ -90,9 +90,9 @@ class DataStore {
 }
 
 // Global singleton to preserve state across API routes in dev mode
-const globalStore = global as unknown as { __nagarDrishtiStore?: DataStore };
+const globalStore = global as unknown as { __pramaanGridStore?: DataStore };
 
-export const store = globalStore.__nagarDrishtiStore || new DataStore();
+export const store = globalStore.__pramaanGridStore || new DataStore();
 if (process.env.NODE_ENV !== 'production') {
-  globalStore.__nagarDrishtiStore = store;
+  globalStore.__pramaanGridStore = store;
 }

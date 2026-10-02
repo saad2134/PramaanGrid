@@ -21,10 +21,10 @@ export default function Navbar({ onResetDemo, isResetting }: NavbarProps) {
           <div>
             <div className="flex items-center gap-2">
               <span className="font-bold text-lg tracking-tight text-white">
-                Nagar-Drishti
+                PramaanGrid
               </span>
               <span className="rounded-full bg-emerald-500/10 px-2 py-0.5 text-[10px] font-semibold text-emerald-400 border border-emerald-500/20">
-                नगर-दृष्टि
+                प्रमाण-ग्रिड
               </span>
             </div>
             <p className="text-xs text-zinc-400 hidden sm:block">

@@ -1,4 +1,4 @@
-# 🏆 Nagar-Drishti (नगर-दृष्टि) — City Vision
+# 🏆 PramaanGrid (प्रमाण-ग्रिड) — The Civic Trust Protocol
 ### *The Anti-Fraud Proof-of-Clearance Protocol for Civic Operations*
 
 [![Next.js 16](https://img.shields.io/badge/Next.js-16.3.8-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
@@ -27,9 +27,9 @@ Across India:
 
 ---
 
-## 🌟 The Solution: Nagar-Drishti
+## 🌟 The Solution: PramaanGrid
 
-**Nagar-Drishti** flips the traditional *"take a photo and file an ignored complaint"* model on its head:
+**PramaanGrid** (from the Sanskrit/Hindi *Pramāna*, meaning mathematical proof or forensic evidence) flips the traditional *"take a photo and file an ignored complaint"* model on its head:
 
 1. **Zero-Friction WhatsApp Gateway**: Citizens don't download heavy government apps. They text a photo and location pin to our WhatsApp bot.
 2. **GenAI "Vision of Tomorrow"**: Instead of a dry ticket number, our AI (**FLUX.1 Fill [dev]**) generates a photorealistic clean projection of their exact street, inspiring community hope and civic pride.
@@ -114,8 +114,8 @@ flowchart TD
 
 ### 1. Clone the repository
 ```bash
-git clone https://github.com/saad2134/nagar-drishti.git
-cd nagar-drishti
+git clone https://github.com/saad2134/pramaan-grid.git
+cd pramaan-grid
 ```
 
 ### 2. Install dependencies
@@ -128,7 +128,7 @@ Copy the example configuration:
 ```bash
 cp .env.example .env.local
 ```
-*(Note: Nagar-Drishti includes a built-in `DEMO_MODE=true` engine with pre-seeded datasets, so you can test the full end-to-end UI, maps, simulator, and fraud verifier immediately without setting up external API keys!)*
+*(Note: PramaanGrid includes a built-in `DEMO_MODE=true` engine with pre-seeded datasets, so you can test the full end-to-end UI, maps, simulator, and fraud verifier immediately without setting up external API keys!)*
 
 To enable live AI inference, add your keys to `.env.local`:
 ```env
@@ -145,7 +145,7 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ---
 
-## 🎮 How to Demo Nagar-Drishti (Judge Walkthrough)
+## 🎮 How to Demo PramaanGrid (Judge Walkthrough)
 
 ### Step 1: The Citizen WhatsApp Experience
 - On the homepage, click **"1. Citizen WhatsApp Gateway"**.

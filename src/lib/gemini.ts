@@ -25,7 +25,7 @@ export async function analyzeCivicIssue(
 
   try {
     const prompt = `
-You are the Nagar-Drishti Municipal AI Auditor for Indian Smart Cities.
+You are the PramaanGrid Municipal AI Auditor for Indian Smart Cities.
 Analyze this user-uploaded civic image and respond ONLY with a strict JSON object (no markdown, no backticks).
 
 SCHEMA:
@@ -125,7 +125,7 @@ export async function verifyProofOfClearance(
 
   try {
     const prompt = `
-You are the Chief Auditor AI for the Nagar-Drishti Municipal Anti-Fraud System.
+You are the Chief Auditor AI for the PramaanGrid Municipal Anti-Fraud System.
 Compare these two images (Image 1: BEFORE cleanup, Image 2: AFTER cleanup submitted by contractor).
 Determine if the contractor genuinely cleared THIS exact spot or attempted fraud.
 

@@ -1,8 +1,7 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Report } from '@/types';
-import { AlertCircle, CheckCircle2, Clock, AlertTriangle } from 'lucide-react';
 
 interface LeafletMapProps {
   reports: Report[];
@@ -43,37 +42,46 @@ function LeafletMapInner({
   selectedReportId,
   onSelectReport,
 }: LeafletMapProps) {
-  const [mapInstance, setMapInstance] = useState<unknown>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  // Store map instance and marker layer ref across renders
+  const mapRef = useRef<any>(null);
+  const layerGroupRef = useRef<any>(null);
+  const leafletModuleRef = useRef<any>(null);
 
+  // 1. Initialize Map ONCE when mounted
   useEffect(() => {
-    // Dynamic import of Leaflet
-    let isMounted = true;
+    let isCancelled = false;
 
-    async function initMap() {
+    async function setupMap() {
+      const container = containerRef.current;
+      if (!container || isCancelled) return;
+
+      // Import Leaflet dynamically in client
       const L = (await import('leaflet')).default;
-      // Import leaflet CSS
       await import('leaflet/dist/leaflet.css');
+      leafletModuleRef.current = L;
 
-      const container = document.getElementById('nagar-drishti-map');
-      if (!container || !isMounted) return;
-
-      // Clean up previous instance if any
-      const existingMap = (container as unknown as { _leaflet_id?: number })._leaflet_id;
-      if (existingMap) {
-        container.innerHTML = '';
+      // If an existing leaflet map instance is attached to this container, tear it down cleanly
+      if (mapRef.current) {
+        mapRef.current.remove();
+        mapRef.current = null;
+      }
+      if ((container as unknown as { _leaflet_id?: number })._leaflet_id) {
+        delete (container as unknown as { _leaflet_id?: number })._leaflet_id;
       }
 
-      // Default center: Hyderabad (approx center between Hyd, Blr, Del)
+      if (isCancelled) return;
+
       const centerLat = reports.length > 0 ? reports[0].lat : 17.385;
       const centerLng = reports.length > 0 ? reports[0].lng : 78.4867;
 
-      const map = L.map('nagar-drishti-map', {
+      const map = L.map(container, {
         center: [centerLat, centerLng],
         zoom: 12,
         zoomControl: true,
       });
 
-      // CartoDB DarkMatter Tiles (Modern sleek dark theme)
+      // CartoDB DarkMatter Tiles
       L.tileLayer(
         'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',
         {
@@ -84,80 +92,107 @@ function LeafletMapInner({
         }
       ).addTo(map);
 
-      // Custom Pin Icons for each status
-      const getMarkerColor = (status: string) => {
-        switch (status) {
-          case 'RESOLVED':
-            return '#10b981'; // Emerald
-          case 'FRAUD':
-            return '#f43f5e'; // Rose
-          case 'ASSIGNED':
-            return '#06b6d4'; // Cyan
-          default:
-            return '#f59e0b'; // Amber
-        }
-      };
+      // Create a persistent layer group for markers so we don't recreate the map on updates
+      const layerGroup = L.layerGroup().addTo(map);
+      layerGroupRef.current = layerGroup;
+      mapRef.current = map;
 
-      const markers: unknown[] = [];
-
-      reports.forEach((report) => {
-        const color = getMarkerColor(report.status);
-
-        // Custom HTML marker pin with pulsating radar effect
-        const customIcon = L.divIcon({
-          className: 'custom-leaflet-marker',
-          html: `
-            <div style="position: relative; display: flex; align-items: center; justify-content: center;">
-              <span style="position: absolute; width: 28px; height: 28px; border-radius: 9999px; background-color: ${color}; opacity: 0.35; animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;"></span>
-              <span style="position: relative; width: 18px; height: 18px; border-radius: 9999px; background-color: ${color}; border: 3px solid #09090b; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5);"></span>
-            </div>
-          `,
-          iconSize: [28, 28],
-          iconAnchor: [14, 14],
-        });
-
-        const marker = L.marker([report.lat, report.lng], { icon: customIcon }).addTo(map);
-
-        marker.on('click', () => {
-          if (onSelectReport) onSelectReport(report);
-        });
-
-        // Popup HTML
-        const popupContent = `
-          <div style="font-family: system-ui, -apple-system, sans-serif; padding: 4px; max-width: 220px; color: #18181b;">
-            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
-              <span style="font-weight: 700; font-size: 12px; color: #09090b;">#${report.id}</span>
-              <span style="font-size: 10px; font-weight: 600; padding: 2px 6px; border-radius: 4px; background: ${color}20; color: ${color};">${report.status}</span>
-            </div>
-            <img src="${report.original_image_url}" style="width: 100%; height: 90px; object-fit: cover; border-radius: 6px; margin-bottom: 6px;" />
-            <p style="font-size: 11px; margin: 0 0 4px; font-weight: 500; color: #27272a;">${report.address}</p>
-            <div style="font-size: 10px; color: #71717a;">Severity: ${report.severity}/10 • ${report.category}</div>
-          </div>
-        `;
-
-        marker.bindPopup(popupContent);
-        markers.push(marker);
-      });
-
-      // Fit bounds if markers exist
-      if (reports.length > 0) {
-        const group = L.featureGroup(markers as L.Layer[]);
-        map.fitBounds(group.getBounds().pad(0.15));
-      }
-
-      setMapInstance(map);
+      // Populate initial markers
+      renderMarkers(map, layerGroup, L, reports);
     }
 
-    initMap();
+    setupMap();
 
     return () => {
-      isMounted = false;
+      isCancelled = true;
+      if (mapRef.current) {
+        mapRef.current.remove();
+        mapRef.current = null;
+      }
+      const container = containerRef.current;
+      if (container && (container as unknown as { _leaflet_id?: number })._leaflet_id) {
+        delete (container as unknown as { _leaflet_id?: number })._leaflet_id;
+      }
     };
+  }, []); // Run ONCE on mount
+
+  // 2. Update markers when `reports` change without destroying the map container
+  useEffect(() => {
+    if (!mapRef.current || !layerGroupRef.current || !leafletModuleRef.current) return;
+    renderMarkers(
+      mapRef.current,
+      layerGroupRef.current,
+      leafletModuleRef.current,
+      reports
+    );
   }, [reports]);
+
+  // Helper to render or refresh pins in the layer group
+  function renderMarkers(map: any, layerGroup: any, L: any, currentReports: Report[]) {
+    layerGroup.clearLayers();
+
+    const getMarkerColor = (status: string) => {
+      switch (status) {
+        case 'RESOLVED':
+          return '#10b981'; // Emerald
+        case 'FRAUD':
+          return '#f43f5e'; // Rose
+        case 'ASSIGNED':
+          return '#06b6d4'; // Cyan
+        default:
+          return '#f59e0b'; // Amber
+      }
+    };
+
+    const markers: any[] = [];
+
+    currentReports.forEach((report) => {
+      const color = getMarkerColor(report.status);
+
+      const customIcon = L.divIcon({
+        className: 'custom-leaflet-marker',
+        html: `
+          <div style="position: relative; display: flex; align-items: center; justify-content: center;">
+            <span style="position: absolute; width: 28px; height: 28px; border-radius: 9999px; background-color: ${color}; opacity: 0.35; animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;"></span>
+            <span style="position: relative; width: 18px; height: 18px; border-radius: 9999px; background-color: ${color}; border: 3px solid #09090b; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5);"></span>
+          </div>
+        `,
+        iconSize: [28, 28],
+        iconAnchor: [14, 14],
+      });
+
+      const marker = L.marker([report.lat, report.lng], { icon: customIcon });
+
+      marker.on('click', () => {
+        if (onSelectReport) onSelectReport(report);
+      });
+
+      const popupContent = `
+        <div style="font-family: system-ui, -apple-system, sans-serif; padding: 4px; max-width: 220px; color: #18181b;">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
+            <span style="font-weight: 700; font-size: 12px; color: #09090b;">#${report.id}</span>
+            <span style="font-size: 10px; font-weight: 600; padding: 2px 6px; border-radius: 4px; background: ${color}20; color: ${color};">${report.status}</span>
+          </div>
+          <img src="${report.original_image_url}" style="width: 100%; height: 90px; object-fit: cover; border-radius: 6px; margin-bottom: 6px;" />
+          <p style="font-size: 11px; margin: 0 0 4px; font-weight: 500; color: #27272a;">${report.address}</p>
+          <div style="font-size: 10px; color: #71717a;">Severity: ${report.severity}/10 • ${report.category}</div>
+        </div>
+      `;
+
+      marker.bindPopup(popupContent);
+      layerGroup.addLayer(marker);
+      markers.push(marker);
+    });
+
+    if (markers.length > 0) {
+      const group = L.featureGroup(markers);
+      map.fitBounds(group.getBounds().pad(0.15));
+    }
+  }
 
   return (
     <div className="relative h-full min-h-[420px] w-full rounded-2xl overflow-hidden border border-zinc-800 bg-zinc-950 shadow-inner">
-      <div id="nagar-drishti-map" className="h-full w-full min-h-[420px]" />
+      <div ref={containerRef} className="h-full w-full min-h-[420px]" />
 
       {/* Floating Legend */}
       <div className="absolute top-3 right-3 z-[1000] flex flex-col gap-1 rounded-xl bg-zinc-950/90 border border-zinc-800 p-2.5 text-[10px] text-zinc-300 backdrop-blur-md shadow-xl">

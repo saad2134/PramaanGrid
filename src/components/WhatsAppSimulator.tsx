@@ -114,7 +114,7 @@ export default function WhatsAppSimulator({
         const botReply: WhatsAppMessage = {
           id: `bot-${Date.now()}`,
           sender: 'bot',
-          text: `⚠️ Nagar-Drishti Troll Shield Alert:\n\n${resData.message}\n\nOur Gemini Flash model automatically filters out non-civic photos to protect municipal response resources. Please upload an image of solid waste or a drain blockage.`,
+          text: `⚠️ PramaanGrid Troll Shield Alert:\n\n${resData.message}\n\nOur Gemini Flash model automatically filters out non-civic photos to protect municipal response resources. Please upload an image of solid waste or a drain blockage.`,
           timestamp: new Date().toLocaleTimeString([], {
             hour: '2-digit',
             minute: '2-digit',
@@ -162,12 +162,12 @@ export default function WhatsAppSimulator({
       <div className="flex items-center justify-between bg-[#202c33] px-4 py-3 border-b border-zinc-800 text-white">
         <div className="flex items-center gap-3">
           <div className="relative flex h-10 w-10 items-center justify-center rounded-full bg-emerald-700 text-white font-bold text-sm">
-            <span>ND</span>
+            <span>PG</span>
             <span className="absolute bottom-0 right-0 h-3 w-3 rounded-full bg-emerald-400 border-2 border-[#202c33]" />
           </div>
           <div>
             <h3 className="font-semibold text-sm flex items-center gap-1.5">
-              <span>Nagar-Drishti Official</span>
+              <span>PramaanGrid Official</span>
               <ShieldCheck className="h-4 w-4 text-emerald-400" />
             </h3>
             <p className="text-[11px] text-zinc-400">

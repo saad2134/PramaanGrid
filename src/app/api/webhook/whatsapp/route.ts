@@ -25,19 +25,19 @@ export async function POST(request: NextRequest) {
 
     if (!mediaUrl && !body) {
       replyMessage =
-        '🙏 Namaste from Nagar-Drishti (नगर-दृष्टि).\nPlease send a photo of the garbage dump or clogged drain along with your location pin to register an official civic report.';
+        '🙏 Namaste from PramaanGrid (प्रमाण-ग्रिड).\nPlease send a photo of the garbage dump or clogged drain along with your location pin to register an official civic report.';
     } else if (mediaUrl) {
       // 1. Multimodal AI Analysis via Gemini Flash
       const triage = await analyzeCivicIssue(mediaUrl, 'image/jpeg', body);
 
       if (!triage.is_civic_issue || !triage.troll_filter_passed) {
-        replyMessage = `⚠️ Nagar-Drishti AI Triage Notice:\n${triage.reasoning}\n\nPlease submit an image of a municipal waste blackspot or stormwater drain.`;
+        replyMessage = `⚠️ PramaanGrid AI Triage Notice:\n${triage.reasoning}\n\nPlease submit an image of a municipal waste blackspot or stormwater drain.`;
       } else {
         // 2. Generate Vision of Tomorrow via Replicate FLUX.1 Fill
         const cleanVision = await generateCleanVision(mediaUrl);
 
         // 3. Register ticket in system
-        const ticketId = `REP-WA-${Date.now().toString().slice(-4)}`;
+        const ticketId = `REP-PG-${Date.now().toString().slice(-4)}`;
         const report: Report = {
           id: ticketId,
           phone_hash: from ? from.slice(0, 6) + '*****' : '9198480*****',
@@ -78,7 +78,7 @@ export async function POST(request: NextRequest) {
     console.error('WhatsApp webhook error:', error);
     const fallbackTwiml = `<?xml version="1.0" encoding="UTF-8"?>
 <Response>
-    <Message>🙏 Thank you for your message. Your civic report is being processed by Nagar-Drishti.</Message>
+    <Message>🙏 Thank you for your message. Your civic report is being processed by PramaanGrid.</Message>
 </Response>`;
     return new NextResponse(fallbackTwiml, {
       headers: { 'Content-Type': 'text/xml' },

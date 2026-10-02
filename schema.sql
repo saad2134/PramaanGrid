@@ -1,5 +1,5 @@
 -- ============================================================
--- Nagar-Drishti (नगर-दृष्टि) — Database Schema
+-- PramaanGrid (प्रमाण-ग्रिड) — Database Schema
 -- AI First Product Builder Hackathon 2026
 -- Database: Supabase (PostgreSQL + PostGIS)
 -- ============================================================

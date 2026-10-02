@@ -13,7 +13,7 @@ export default function Footer() {
             </div>
             <div>
               <p className="font-bold text-white text-sm">
-                Nagar-Drishti (नगर-दृष्टि)
+                PramaanGrid (प्रमाण-ग्रिड)
               </p>
               <p className="text-[11px] text-zinc-500">
                 Built for AI First Product Builder Hackathon 2026 — College.dev
@@ -57,7 +57,7 @@ export default function Footer() {
         </div>
 
         <div className="mt-8 pt-6 border-t border-zinc-900 flex flex-col sm:flex-row items-center justify-between text-[11px] text-zinc-600 gap-2">
-          <p>© 2026 Nagar-Drishti. Open source under MIT License. All rights reserved.</p>
+          <p>© 2026 PramaanGrid. Open source under MIT License. All rights reserved.</p>
           <p className="flex items-center gap-1">
             Engineered with <Heart className="h-3 w-3 text-rose-500 fill-rose-500" /> for a cleaner Bharat.
           </p>

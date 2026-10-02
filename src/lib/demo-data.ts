@@ -291,7 +291,7 @@ export const INITIAL_WHATSAPP_MESSAGES: WhatsAppMessage[] = [
   {
     id: 'msg-2',
     sender: 'bot',
-    text: '✅ Report Received & Authenticated!\n\nTicket ID: #NB-HYD-01\nWard: Ward 98 (Jubilee Hills)\nAI Severity Rating: 9/10 (Critical - Drain Blockage)\nEstimated Volume: 4.6 m³\n\n🛡️ Privacy Shield: Pedestrian faces & vehicle plates automatically blurred.\n\n✨ Here is Nagar-Drishti\'s "Vision of Tomorrow" — what your street can look like once cleared:',
+    text: '✅ Report Received & Authenticated!\n\nTicket ID: #PG-HYD-01\nWard: Ward 98 (Jubilee Hills)\nAI Severity Rating: 9/10 (Critical - Drain Blockage)\nEstimated Volume: 4.6 m³\n\n🛡️ Privacy Shield: Pedestrian faces & vehicle plates automatically blurred.\n\n✨ Here is PramaanGrid\'s "Vision of Tomorrow" — what your street can look like once cleared:',
     cleanImageUrl:
       'https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=800&q=80',
     ticketId: 'REP-HYD-01',

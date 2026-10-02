@@ -40,10 +40,10 @@ The Public Information Officer (PIO),
 Municipal Corporation / Urban Local Body,
 Zone / Ward: ${report.ward}, ${report.city}.
 
-1. Full Name of Applicant: [Citizen via Nagar-Drishti Protocol]
+1. Full Name of Applicant: [Citizen via PramaanGrid Protocol]
 2. Subject Matter of Information:
    Non-Clearance of Solid Waste Blackspot & Clogged Infrastructure at ${report.address}
-   (Nagar-Drishti Ticket Ref: #${report.id})
+   (PramaanGrid Ticket Ref: #${report.id})
 
 3. Background & Facts:
    An urgent civic hazard regarding municipal solid waste / drain blockage was documented and submitted on ${new Date(
@@ -80,7 +80,7 @@ Signature of Applicant`;
 विषय: कचरा ब्लैकस्पॉट व ड्रेनेज रुकावट के संबंध में सूचना बाबत। (टिकट #${report.id})
 
 महोदय,
-1. आवेदक का विवरण: [नागरिक - नगर-दृष्टि प्रणाली]
+1. आवेदक का विवरण: [नागरिक - प्रमाण-ग्रिड प्रणाली]
 2. स्थान का विवरण: ${report.address} (अक्षांश: ${report.lat.toFixed(
     4
   )}, देशांतर: ${report.lng.toFixed(4)})

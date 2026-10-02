@@ -85,7 +85,7 @@ export default function Home() {
 
               {/* Title */}
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white max-w-4xl">
-                Nagar-Drishti <span className="text-emerald-400 font-serif italic">(नगर-दृष्टि)</span>
+                PramaanGrid <span className="text-emerald-400 font-serif italic">(प्रमाण-ग्रिड)</span>
               </h1>
               <p className="mt-4 text-xl sm:text-2xl font-bold bg-gradient-to-r from-zinc-100 via-zinc-300 to-zinc-500 bg-clip-text text-transparent">
                 The Anti-Fraud Proof-of-Clearance Protocol for Civic Operations
@@ -95,7 +95,7 @@ export default function Home() {
               <p className="mt-4 text-sm sm:text-base text-zinc-400 max-w-2xl leading-relaxed">
                 India generates 150,000 tonnes of waste daily, yet 40% remains uncollected while municipal corporations bleed millions on ghost contracts and unverified cleanups.
                 <span className="text-zinc-200 font-medium block mt-1">
-                  Nagar-Drishti turns waste reporting into an algorithmic trust protocol: zero app download via WhatsApp, instant GenAI &quot;Vision of Tomorrow&quot;, and mathematical Proof-of-Clearance that makes contractor fraud impossible.
+                  PramaanGrid turns waste reporting into an algorithmic trust protocol: zero app download via WhatsApp, instant GenAI &quot;Vision of Tomorrow&quot;, and mathematical Proof-of-Clearance that makes contractor fraud impossible.
                 </span>
               </p>
 
@@ -205,7 +205,7 @@ export default function Home() {
                     Zero-Friction Ingestion with GenAI &quot;Vision of Tomorrow&quot;
                   </h2>
                   <p className="mt-2 text-sm text-zinc-400 leading-relaxed">
-                    Most civic apps fail because citizens refuse to download 80MB government apps that log out every 5 minutes. Nagar-Drishti runs natively on WhatsApp — the app 500 million Indians already use daily.
+                    Most civic apps fail because citizens refuse to download 80MB government apps that log out every 5 minutes. PramaanGrid runs natively on WhatsApp — the app 500 million Indians already use daily.
                   </p>
                 </div>
 

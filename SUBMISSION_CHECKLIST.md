@@ -1,4 +1,4 @@
-# 📋 Hackathon Submission Checklist — Nagar-Drishti
+# 📋 Hackathon Submission Checklist — PramaanGrid (प्रमाण-ग्रिड)
 ## AI First Product Builder Hackathon 2026
 
 **Deadline: October 10, 2026 · 8:00 PM IST**
@@ -100,7 +100,7 @@ nagar-drishti/
 
 ## 🏷️ Submission Metadata
 
-- **Project Name**: Nagar-Drishti (नगर-दृष्टि)
+- **Project Name**: PramaanGrid (प्रमाण-ग्रिड)
 - **Tagline**: "See the potential. Verify the truth."
 - **Tracks**:
   - Track 02: Street & Neighbourhood Action
