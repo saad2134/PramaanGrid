@@ -188,10 +188,10 @@ export default function Footer() {
             &copy; 2026 PramaanGrid (प्रमाण-ग्रिड). Free and Open Source under GNU General Public License v3.0 (GPL-3.0).
           </p>
 
-          {/* Status: Operational Button with Border linking to /status */}
+          {/* Status: Operational Squircle Button with Border linking to /status */}
           <Link
             href="/status"
-            className="inline-flex items-center gap-2.5 rounded-full border border-emerald-500/35 bg-emerald-950/40 hover:bg-emerald-950/70 hover:border-emerald-500/60 px-3.5 py-1.5 text-xs font-medium text-zinc-300 hover:text-white transition-all duration-200 shadow-sm group cursor-pointer"
+            className="inline-flex items-center gap-2.5 rounded-xl border border-emerald-500/35 bg-emerald-950/40 hover:bg-emerald-950/70 hover:border-emerald-500/60 px-3.5 py-1.5 text-xs font-medium text-zinc-300 hover:text-white transition-all duration-200 shadow-sm group cursor-pointer"
           >
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
