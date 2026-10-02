@@ -24,24 +24,25 @@ export function MockupFrame({
       className={`relative rounded-3xl overflow-hidden glass-panel border border-white/[0.12] shadow-2xl shadow-black/80 ${className}`}
     >
       {/* Top Application Bar */}
-      <div className="flex items-center justify-between px-4 py-3 bg-[#0d1117]/90 border-b border-white/[0.08] text-xs">
+      <div className="relative flex items-center justify-between px-4 py-3 bg-[#0d1117]/90 border-b border-white/[0.08] text-xs">
         {/* Window controls */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 z-10 shrink-0">
           <div className="h-3 w-3 rounded-full bg-rose-500/80 shadow-sm" />
           <div className="h-3 w-3 rounded-full bg-amber-500/80 shadow-sm" />
           <div className="h-3 w-3 rounded-full bg-emerald-500/80 shadow-sm" />
         </div>
 
-        {/* Address / Status Pill */}
-        <div className="hidden sm:flex items-center gap-2 rounded-lg bg-black/40 px-3 py-1 border border-white/[0.06] text-[11px] text-zinc-400 font-mono">
-          <Lock className="h-3 w-3 text-emerald-400" />
-          <span className="text-zinc-300 font-medium">{url}</span>
+        {/* Address / Status Pill: Absolutely centered in the frame */}
+        <div className="absolute left-1/2 -translate-x-1/2 flex items-center gap-2 rounded-lg bg-black/50 px-3.5 py-1 border border-white/[0.08] text-[11px] text-zinc-400 font-mono shadow-inner z-0 pointer-events-none">
+          <Lock className="h-3 w-3 text-emerald-400 shrink-0" />
+          <span className="text-zinc-200 font-medium tracking-tight whitespace-nowrap">{url}</span>
         </div>
 
         {/* Right Badge */}
-        <div className="flex items-center gap-1.5 rounded-full bg-emerald-500/10 px-2.5 py-0.5 text-[10px] font-semibold text-emerald-400 border border-emerald-500/20">
-          <ShieldCheck className="h-3 w-3" />
-          <span>{badge}</span>
+        <div className="flex items-center gap-1.5 rounded-full bg-emerald-500/10 px-2.5 py-0.5 text-[10px] font-semibold text-emerald-400 border border-emerald-500/20 z-10 shrink-0">
+          <ShieldCheck className="h-3 w-3 shrink-0" />
+          <span className="hidden sm:inline">{badge}</span>
+          <span className="sm:hidden">SECURE</span>
         </div>
       </div>
 
