@@ -197,6 +197,23 @@ export const FooterBrandShowcase: React.FC<FooterBrandShowcaseProps> = ({
             </feMerge>
           </filter>
 
+          {/* Theme Color Gradients for 3D Text */}
+          <linearGradient id="pgThemeTextGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor="#059669" />
+            <stop offset="25%" stopColor="#10b981" />
+            <stop offset="50%" stopColor="#34d399" />
+            <stop offset="75%" stopColor="#10b981" />
+            <stop offset="100%" stopColor="#059669" />
+          </linearGradient>
+
+          <linearGradient id="pgThemeStrokeGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor="#065f46" stopOpacity="0.3" />
+            <stop offset="30%" stopColor="#047857" stopOpacity="0.7" />
+            <stop offset="50%" stopColor="#10b981" stopOpacity="0.9" />
+            <stop offset="70%" stopColor="#047857" stopOpacity="0.7" />
+            <stop offset="100%" stopColor="#065f46" stopOpacity="0.3" />
+          </linearGradient>
+
           {/* Horizon Occlusion ClipPath */}
           <clipPath id="pgAboveHorizonClip">
             <path d="M -100 -100 L 1540 -100 L 1540 240 Q 720 130 -100 240 Z" />
@@ -209,10 +226,11 @@ export const FooterBrandShowcase: React.FC<FooterBrandShowcaseProps> = ({
           <motion.text
             textAnchor="middle"
             dominantBaseline="central"
-            strokeWidth="1.2"
+            strokeWidth="1.5"
+            stroke="url(#pgThemeStrokeGradient)"
             strokeLinejoin="round"
             mask="url(#pgBrandTextTaperMask)"
-            className="fill-transparent stroke-zinc-700 font-sans text-[126px] font-black tracking-wider"
+            className="fill-transparent font-sans text-[126px] font-black tracking-wider opacity-60"
             initial={{ strokeDashoffset: 2000, strokeDasharray: 2000 }}
             animate={{
               strokeDashoffset: 0,
@@ -235,8 +253,10 @@ export const FooterBrandShowcase: React.FC<FooterBrandShowcaseProps> = ({
             strokeWidth="2"
             strokeLinejoin="round"
             strokeLinecap="round"
+            stroke="#34d399"
+            fill="url(#pgThemeTextGradient)"
             mask="url(#pgBrandTextMask)"
-            className="fill-white stroke-white font-sans text-[126px] font-black tracking-wider drop-shadow-[0_0_20px_rgba(16,185,129,0.35)]"
+            className="font-sans text-[126px] font-black tracking-wider drop-shadow-[0_0_24px_rgba(16,185,129,0.55)]"
           >
             <textPath href="#pgBrandTextConcentricArc" startOffset="50%" textAnchor="middle">
               {text}

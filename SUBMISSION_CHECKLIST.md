@@ -1,8 +1,8 @@
-# 📋 Hackathon Submission Checklist — PramaanGrid (प्रमाण-�-्रिड)
+# 📋 Hackathon Submission Checklist — PramaanGrid (प्रमाण-�-्रिड)
 ## AI First Product Builder Hackathon 2026
 
 **Deadline: October 10, 2026 · 8:00 PM IST**
-**Platform: College.dev**
+**Platform: college.dev**
 
 ---
 
@@ -100,7 +100,7 @@ nagar-drishti/
 
 ## 🏷️ Submission Metadata
 
-- **Project Name**: PramaanGrid (प्रमाण-�-्रिड)
+- **Project Name**: PramaanGrid (प्रमाण-�-्रिड)
 - **Tagline**: "See the potential. Verify the truth."
 - **Tracks**:
   - Track 02: Street & Neighbourhood Action
@@ -169,5 +169,5 @@ NEXT_PUBLIC_APP_URL=
 - [ ] README has screenshots + setup guide
 - [ ] `.env.example` has all keys listed (no actual values)
 - [ ] No secrets in git history (`git log --all -p | grep -i "key\|secret\|token"`)
-- [ ] Submitted on College.dev
+- [ ] Submitted on college.dev
 - [ ] Celebrated 🎉

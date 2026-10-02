@@ -89,17 +89,6 @@ export default function Home() {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
               {/* LEFT COLUMN: Editorial & Value Proposition */}
               <div className="lg:col-span-7 flex flex-col items-start text-left">
-                {/* Pilot Status Badge */}
-                <div className="inline-flex items-center gap-2 rounded-full bg-white/[0.04] border border-white/[0.08] px-3.5 py-1 text-xs text-zinc-300 mb-5 shadow-sm">
-                  <span className="relative flex h-2 w-2">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                    <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
-                  </span>
-                  <span className="font-mono text-[11px] font-bold text-emerald-400">LIVE PROTOCOL</span>
-                  <span className="text-zinc-600">•</span>
-                  <span className="text-zinc-300">Municipal Anti-Fraud Grid</span>
-                </div>
-
                 {/* Main Headline */}
                 <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white leading-[1.08]">
                   PramaanGrid <span className="text-emerald-400 font-serif italic font-normal block sm:inline">(प्रमाण-ग्रिड)</span>

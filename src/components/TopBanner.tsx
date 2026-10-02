@@ -19,7 +19,7 @@ export default function TopBanner() {
         <span className="text-emerald-500/50 hidden sm:inline">•</span>
 
         <span className="text-zinc-300 hidden md:inline text-[11px]">
-          College.dev &amp; Wonksknow Technologies
+          college.dev &amp; Wonksknow Technologies
         </span>
 
         <span className="rounded-full bg-emerald-500/20 border border-emerald-500/40 px-2 py-0.5 text-[10px] font-bold text-emerald-300 uppercase tracking-wider">

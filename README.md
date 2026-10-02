@@ -1,4 +1,4 @@
-# 🏆 PramaanGrid (प्रमाण-�-्रिड) — The Civic Trust Protocol
+# 🏆 PramaanGrid (प्रमाण-�-्रिड) — The Civic Trust Protocol
 ### *The Anti-Fraud Proof-of-Clearance Protocol for Civic Operations*
 
 [![Next.js 16](https://img.shields.io/badge/Next.js-16.3.8-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
@@ -8,7 +8,7 @@
 [![Supabase](https://img.shields.io/badge/Supabase-PostGIS-3ECF8E?style=for-the-badge&logo=supabase)](https://supabase.com/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-emerald?style=for-the-badge)](./LICENSE)
 
-> Built for the **AI First Product Builder Hackathon 2026** by College.dev & Wonksknow Technologies.  
+> Built for the **AI First Product Builder Hackathon 2026** by college.dev & Wonksknow Technologies.  
 > **Theme**: *"Use AI to build a cleaner Bharat"*  
 > **Submission Deadline**: October 10, 2026 · 8:00 PM IST  
 > **Developer**: [Saad](https://github.com/saad2134) (Osmania University / MCET Hyderabad)
@@ -42,7 +42,7 @@ Across India:
 
 ---
 
-## �-️ System Architecture
+## �-️ System Architecture
 
 ```mermaid
 flowchart TD

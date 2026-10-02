@@ -38,18 +38,8 @@ export default function Navbar({ onResetDemo, isResetting }: NavbarProps) {
           </div>
         </Link>
 
-        {/* Live Trust Badges & Navigation */}
+        {/* Live Navigation & Actions */}
         <div className="flex items-center gap-2.5 sm:gap-3.5">
-          <div className="hidden lg:flex items-center gap-2 rounded-full bg-white/[0.03] border border-white/[0.08] px-3.5 py-1 text-xs text-zinc-300">
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-            </span>
-            <span className="text-[11px] font-medium text-zinc-300">
-              VLM &amp; GPS Cryptographic Escrow Active
-            </span>
-          </div>
-
           <Link
             href="/dashboard"
             className="flex items-center gap-1.5 rounded-xl bg-white/[0.05] hover:bg-white/[0.1] border border-white/[0.1] px-3.5 py-1.5 text-xs font-semibold text-zinc-200 hover:text-white transition-all hover:scale-[1.02] active:scale-[0.98]"
