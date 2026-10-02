@@ -14,10 +14,8 @@ export const INITIAL_REPORTS: Report[] = [
   {
     id: 'REP-HYD-01',
     phone_hash: '9198480*****',
-    original_image_url:
-      'https://images.unsplash.com/photo-1605600659873-d808a13e4d2a?auto=format&fit=crop&w=900&q=80',
-    ai_clean_image_url:
-      'https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=900&q=80',
+    original_image_url: '/demo/banjara-dump.jpg',
+    ai_clean_image_url: '/demo/banjara-clean.jpg',
     lat: 17.4156,
     lng: 78.4358,
     address: 'Near MLA Colony, Road No. 12, Banjara Hills',
@@ -88,10 +86,8 @@ export const INITIAL_REPORTS: Report[] = [
   {
     id: 'REP-BLR-03',
     phone_hash: '9198860*****',
-    original_image_url:
-      'https://images.unsplash.com/photo-1530587191325-3db32d826c18?auto=format&fit=crop&w=900&q=80',
-    ai_clean_image_url:
-      'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=900&q=80',
+    original_image_url: '/demo/drain-choked.jpg',
+    ai_clean_image_url: '/demo/drain-clean.jpg',
     lat: 12.9719,
     lng: 77.6412,
     address: 'Opp. BDA Complex, 100 Feet Road, Indiranagar',
@@ -198,8 +194,7 @@ export const INITIAL_CLEARANCE_PROOFS: ClearanceProof[] = [
   {
     id: 'PRF-VERIFIED-01',
     report_id: 'REP-BLR-03',
-    after_image_url:
-      'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=900&q=80',
+    after_image_url: '/demo/drain-clean.jpg',
     worker_id: 'WRK-8821',
     worker_name: 'Rameshwarappa Gowda',
     contractor_name: 'Swachh Bengaluru Solutions',
@@ -279,8 +274,7 @@ export const INITIAL_WHATSAPP_MESSAGES: WhatsAppMessage[] = [
     id: 'msg-1',
     sender: 'citizen',
     text: 'Namaste. There is a huge garbage dump here for 3 days blocking our street drain near Road 12 Banjara Hills.',
-    imageUrl:
-      'https://images.unsplash.com/photo-1605600659873-d808a13e4d2a?auto=format&fit=crop&w=800&q=80',
+    imageUrl: '/demo/banjara-dump.jpg',
     location: {
       lat: 17.4156,
       lng: 78.4358,
@@ -292,8 +286,7 @@ export const INITIAL_WHATSAPP_MESSAGES: WhatsAppMessage[] = [
     id: 'msg-2',
     sender: 'bot',
     text: '✅ Report Received & Authenticated!\n\nTicket ID: #PG-HYD-01\nWard: Ward 98 (Jubilee Hills)\nAI Severity Rating: 9/10 (Critical - Drain Blockage)\nEstimated Volume: 4.6 m³\n\n🛡️ Privacy Shield: Pedestrian faces & vehicle plates automatically blurred.\n\n✨ Here is PramaanGrid\'s "Vision of Tomorrow": what your street can look like once cleared:',
-    cleanImageUrl:
-      'https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=800&q=80',
+    cleanImageUrl: '/demo/banjara-clean.jpg',
     ticketId: 'REP-HYD-01',
     timestamp: '10:14 AM',
   },

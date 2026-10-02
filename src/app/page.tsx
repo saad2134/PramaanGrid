@@ -195,7 +195,7 @@ export default function Home() {
                         <span className="text-[9px] text-zinc-500 font-mono">10:14 AM</span>
                       </div>
                       <img
-                        src="https://images.unsplash.com/photo-1605600659873-d808a13e4d2a?auto=format&fit=crop&w=600&q=80"
+                        src="/demo/banjara-dump.jpg"
                         alt="Before Cleanup"
                         className="h-28 w-full object-cover"
                       />
@@ -218,7 +218,7 @@ export default function Home() {
                       <img
                         src={
                           heroAuditMode === 'legit'
-                            ? 'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=600&q=80'
+                            ? '/demo/banjara-clean.jpg'
                             : 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80'
                         }
                         alt="After Cleanup"
