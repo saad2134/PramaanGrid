@@ -1,0 +1,21 @@
+cff-version: 1.2.0
+message: "If you use this software in your research or project, please cite it using the metadata below."
+title: "PramaanGrid: Algorithmic Proof-of-Clearance and Anti-Fraud Escrow Protocol for Indian Municipalities"
+abstract: "Open-source civic trust and anti-fraud infrastructure designed for urban municipal waste management, featuring bi-temporal VLM landmark verification, GPS spoofing mitigation, and automated escrow settlement."
+authors:
+  - name: "Saad"
+    email: "reach.saad@outlook.com"
+version: 1.0.0
+date-released: 2026-10-02
+license: GPL-3.0
+url: "https://github.com/reachsaad/PramaanGrid"
+repository-code: "https://github.com/reachsaad/PramaanGrid"
+keywords:
+  - "civic-tech"
+  - "anti-fraud"
+  - "smart-cities"
+  - "waste-management"
+  - "computer-vision"
+  - "vlm-verification"
+  - "escrow-protocol"
+  - "municipal-governance"
