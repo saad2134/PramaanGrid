@@ -46,6 +46,20 @@ export async function POST(request: NextRequest) {
     const submittedLat = Number(afterLat ?? report.lat);
     const submittedLng = Number(afterLng ?? report.lng);
 
+    if (
+      isNaN(submittedLat) ||
+      isNaN(submittedLng) ||
+      submittedLat < -90 ||
+      submittedLat > 90 ||
+      submittedLng < -180 ||
+      submittedLng > 180
+    ) {
+      return NextResponse.json(
+        { success: false, error: 'Invalid geographic coordinates provided' },
+        { status: 400 }
+      );
+    }
+
     const gpsResult = evaluateGpsMatch(
       report.lat,
       report.lng,
