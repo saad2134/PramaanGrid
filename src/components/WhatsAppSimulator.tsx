@@ -205,33 +205,34 @@ export default function WhatsAppSimulator({
         {/* Physical Button: Power / Lock (Right) */}
         <div className="absolute -right-[3.5px] top-[170px] w-[3.5px] h-[74px] bg-zinc-600 rounded-r-sm" />
 
-        {/* INNER SCREEN CONTAINER */}
-        <div className="relative h-full w-full rounded-[42px] overflow-hidden bg-[#0b141a] flex flex-col shadow-inner border border-black/80">
-          {/* Dynamic Island Pill */}
-          <div className="absolute top-2.5 left-1/2 -translate-x-1/2 z-40 w-[114px] h-[26px] bg-black rounded-full flex items-center justify-between px-3 shadow-lg border border-white/[0.04]">
-            <div className="w-2.5 h-2.5 rounded-full bg-[#080b10] ring-1 ring-blue-900/40 flex items-center justify-center">
-              <div className="w-1 h-1 rounded-full bg-blue-500/30" />
+        {/* INNER SCREEN CONTAINER WITH DEDICATED OLED BEZEL */}
+        <div className="relative h-full w-full rounded-[44px] p-[2.5px] bg-black overflow-hidden [isolation:isolate] [contain:paint]">
+          <div className="relative h-full w-full rounded-[41px] overflow-hidden bg-[#0b141a] flex flex-col [transform:translateZ(0)] [contain:paint]">
+            {/* Dynamic Island Pill */}
+            <div className="absolute top-2 left-1/2 -translate-x-1/2 z-40 w-[114px] h-[25px] bg-black rounded-full flex items-center justify-between px-3 shadow-lg border border-white/[0.05]">
+              <div className="w-2.5 h-2.5 rounded-full bg-[#080b10] ring-1 ring-blue-900/40 flex items-center justify-center">
+                <div className="w-1 h-1 rounded-full bg-blue-500/30" />
+              </div>
+              <div className="w-2 h-2 rounded-full bg-[#0c0e14]" />
             </div>
-            <div className="w-2 h-2 rounded-full bg-[#0c0e14]" />
-          </div>
 
-          {/* Realistic Phone Status Bar */}
-          <div className="relative z-30 pt-3 pb-1 px-7 flex items-center justify-between text-white text-[12px] font-semibold bg-[#202c33]/90 backdrop-blur-sm select-none">
-            <span className="font-mono tracking-tight text-zinc-200">10:14</span>
-            <div className="flex items-center gap-1.5 text-zinc-300">
-              <Signal className="w-3.5 h-3.5 fill-current" />
-              <Wifi className="w-3.5 h-3.5" />
-              <div className="flex items-center gap-0.5">
-                <span className="text-[10px] font-mono text-zinc-300">98%</span>
-                <div className="w-5 h-2.5 rounded-[4px] border border-zinc-400 p-[1px] flex items-center">
-                  <div className="h-full w-[95%] bg-emerald-400 rounded-[2px]" />
+            {/* Realistic Phone Status Bar with matching curved top */}
+            <div className="relative z-30 pt-3 pb-1 px-7 flex items-center justify-between text-white text-[12px] font-semibold bg-[#202c33] select-none rounded-t-[41px]">
+              <span className="font-mono tracking-tight text-zinc-200">10:14</span>
+              <div className="flex items-center gap-1.5 text-zinc-300">
+                <Signal className="w-3.5 h-3.5 fill-current" />
+                <Wifi className="w-3.5 h-3.5" />
+                <div className="flex items-center gap-0.5">
+                  <span className="text-[10px] font-mono text-zinc-300">98%</span>
+                  <div className="w-5 h-2.5 rounded-[4px] border border-zinc-400 p-[1px] flex items-center">
+                    <div className="h-full w-[95%] bg-emerald-400 rounded-[2px]" />
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
 
-          {/* WhatsApp Official Verified Header */}
-          <div className="relative z-20 flex items-center justify-between bg-[#202c33] px-3 py-2.5 border-b border-white/[0.06] text-white shadow-md">
+            {/* WhatsApp Official Verified Header */}
+            <div className="relative z-20 flex items-center justify-between bg-[#202c33] px-3 py-2.5 border-b border-white/[0.06] text-white shadow-md">
             <div className="flex items-center gap-2">
               <button
                 type="button"
@@ -435,11 +436,12 @@ export default function WhatsAppSimulator({
           </div>
 
           {/* Phone Bottom Home Indicator */}
-          <div className="bg-[#202c33] pb-1.5 pt-0.5">
+          <div className="bg-[#202c33] pb-1.5 pt-0.5 rounded-b-[41px]">
             <div className="w-28 h-1 bg-white/40 rounded-full mx-auto" />
           </div>
         </div>
       </div>
     </div>
+  </div>
   );
 }

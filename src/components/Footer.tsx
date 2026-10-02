@@ -96,15 +96,6 @@ export default function Footer() {
               </div>
             </Link>
 
-            {/* Live System Beacon Pill (inspired by DevBandits) */}
-            <div className="inline-flex items-center gap-2 rounded-full bg-emerald-950/40 border border-emerald-500/30 px-3 py-1 text-xs text-emerald-300 my-2">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
-              </span>
-              <span className="font-mono text-[10px] font-bold">ALL PROTOCOL SYSTEMS OPERATIONAL</span>
-            </div>
-
             {/* Mission Statement */}
             <p className="text-zinc-400 text-xs sm:text-sm max-w-sm leading-relaxed mt-2">
               India&apos;s first AI-native Proof-of-Clearance protocol for municipal solid waste management. Blocking fraudulent contractor claims, enforcing statutory 12-hour SLAs, and transforming WhatsApp reports into cryptographically audited civic infrastructure.
@@ -176,7 +167,7 @@ export default function Footer() {
             &copy; 2026 PramaanGrid (प्रमाण-ग्रिड). Free and Open Source under GNU General Public License v3.0 (GPL-3.0).
           </p>
 
-          <div className="flex items-center gap-4 text-xs font-medium">
+          <div className="flex flex-wrap items-center gap-3 sm:gap-4 text-xs font-medium">
             <span className="inline-flex items-center gap-1.5 text-zinc-400">
               <Award className="h-3.5 w-3.5 text-emerald-400" />
               <span>college.dev Hackathon 2026</span>
@@ -186,11 +177,18 @@ export default function Footer() {
               href="https://www.gnu.org/licenses/gpl-3.0.html"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full border border-emerald-500/30 bg-emerald-950/40 hover:bg-emerald-950/60 text-[11px] font-mono text-emerald-400 transition-colors shadow-2xs"
+              className="text-zinc-400 hover:text-emerald-400 transition-colors"
             >
-              <FileText className="w-3 h-3 text-emerald-400" />
-              <span>GNU GPL v3</span>
+              GNU GPL v3
             </a>
+            <span className="text-zinc-700">•</span>
+            <div className="inline-flex items-center gap-1.5 text-zinc-400">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+              </span>
+              <span className="font-mono text-[11px] text-emerald-400 font-medium">Status operational</span>
+            </div>
           </div>
         </div>
       </div>
