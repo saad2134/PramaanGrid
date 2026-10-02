@@ -112,109 +112,103 @@ export default function DashboardPage() {
     >
       {!isFullscreen && <Navbar />}
 
-      {/* SUB-HEADER */}
-      <div className="border-b border-zinc-800 bg-zinc-950/95 backdrop-blur-md px-4 sm:px-6 lg:px-8 py-3.5 sticky top-0 z-30 shadow-md">
-        <div
-          className={`mx-auto w-full flex flex-col lg:flex-row lg:items-center justify-between gap-4 ${
-            isFullscreen ? 'max-w-[1800px]' : 'max-w-7xl'
-          }`}
-        >
-          <div className="flex items-center gap-3.5">
-            <Link
-              href="/"
-              className="flex h-10 w-10 shrink-0 items-center justify-center squircle bg-emerald-950/40 border border-emerald-500/20 text-zinc-400 hover:text-white hover:scale-105 transition-all p-1"
-              title="Return to Citizen POV & WhatsApp Simulator"
-            >
-              <img src="/icon.png" alt="PramaanGrid" className="h-full w-full object-cover rounded-[22%]" />
-            </Link>
-            <div>
-              <div className="flex items-center gap-2">
-                <span className="text-[10px] font-mono uppercase tracking-widest text-emerald-400 font-bold">
-                  PramaanGrid Protocol
-                </span>
-                <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                <span className="rounded-full bg-emerald-500/10 px-2 py-0.5 text-[9px] font-mono font-semibold text-emerald-400 border border-emerald-500/20">
-                  Live Audit Feed
-                </span>
-              </div>
-              <h1 className="text-lg font-bold text-white flex items-center gap-2 mt-0.5">
-                <span>Municipal Operations Command Center</span>
-              </h1>
-              <p className="text-xs text-zinc-400">
-                DMAUD • Urban Local Bodies Smart Sanitation &amp; Anti-Fraud Grid
-              </p>
-            </div>
-          </div>
-
-          {/* Quick city tabs & Fullscreen Mode */}
-          <div className="flex flex-wrap items-center gap-2 self-start lg:self-auto">
-            <div className="flex items-center gap-1 rounded-xl bg-zinc-900 p-1 border border-zinc-800 text-xs">
-              {['ALL', 'Hyderabad', 'Bengaluru', 'Delhi'].map((c) => {
-                const count =
-                  c === 'ALL'
-                    ? reports.length
-                    : reports.filter((r) => r.city.toLowerCase() === c.toLowerCase()).length;
-                return (
-                  <button
-                    key={c}
-                    onClick={() => setCityFilter(c)}
-                    className={`flex items-center gap-1.5 rounded-lg px-2.5 py-1 font-medium transition-colors ${
-                      cityFilter === c
-                        ? 'bg-emerald-600 text-white shadow-sm'
-                        : 'text-zinc-400 hover:text-white'
-                    }`}
-                  >
-                    <span>{c}</span>
-                    <span
-                      className={`text-[9px] font-mono rounded px-1 py-0.2 ${
-                        cityFilter === c ? 'bg-black/30 text-emerald-200' : 'bg-zinc-800 text-zinc-500'
-                      }`}
-                    >
-                      {count}
-                    </span>
-                  </button>
-                );
-              })}
-            </div>
-
-            <button
-              onClick={toggleFullscreen}
-              className={`flex items-center gap-1.5 rounded-xl px-3 py-1.5 text-xs font-semibold shadow-sm transition-all border ${
-                isFullscreen
-                  ? 'bg-amber-500/10 hover:bg-amber-500/20 text-amber-300 border-amber-500/40'
-                  : 'bg-zinc-900 hover:bg-zinc-800 text-zinc-300 hover:text-white border-zinc-700/80 hover:border-emerald-500/40'
-              }`}
-              title={isFullscreen ? 'Exit Full Screen mode (ESC)' : 'Enter Full Screen Command Center mode'}
-            >
-              {isFullscreen ? (
-                <>
-                  <Minimize2 className="h-3.5 w-3.5 text-amber-400" />
-                  <span>Exit Full Screen</span>
-                  <kbd className="ml-1 rounded bg-black/50 px-1.5 py-0.5 text-[9px] font-mono text-amber-300 border border-amber-500/30">
-                    ESC
-                  </kbd>
-                </>
-              ) : (
-                <>
-                  <Maximize2 className="h-3.5 w-3.5 text-emerald-400" />
-                  <span>Full Screen</span>
-                  <kbd className="ml-1 rounded bg-black/50 px-1.5 py-0.5 text-[9px] font-mono text-zinc-400 border border-zinc-800">
-                    HUD
-                  </kbd>
-                </>
-              )}
-            </button>
-          </div>
-        </div>
-      </div>
-
       <main
         className={`flex-1 mx-auto w-full px-4 sm:px-6 lg:px-8 py-6 space-y-6 ${
           isFullscreen ? 'max-w-[1800px]' : 'max-w-7xl'
         }`}
       >
-        {/* Top metrics summary */}
-        <StatsBanner metrics={metrics} />
+        {/* COMMAND CENTER OPERATIONS CARD (Stand-alone card, not a conflicting navbar) */}
+        <div className="rounded-3xl glass-panel border border-white/[0.08] bg-zinc-950/80 p-5 sm:p-6 shadow-2xl backdrop-blur-xl">
+          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-5">
+            {/* Left: Emblem, Protocol & Department Titles */}
+            <div className="flex items-center gap-4">
+              <Link
+                href="/"
+                className="flex h-12 w-12 shrink-0 items-center justify-center squircle bg-emerald-950/50 border border-emerald-500/30 text-zinc-400 hover:text-white hover:scale-105 transition-all p-1 shadow-lg shadow-emerald-950/30"
+                title="Return to Citizen POV & WhatsApp Simulator"
+              >
+                <img src="/icon.png" alt="PramaanGrid" className="h-full w-full object-cover rounded-[22%]" />
+              </Link>
+              <div>
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="text-xs font-mono font-bold uppercase tracking-wider text-emerald-400">
+                    PramaanGrid Protocol
+                  </span>
+                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                  <span className="rounded-full bg-emerald-500/10 px-2.5 py-0.5 text-[10px] font-mono font-semibold text-emerald-300 border border-emerald-500/20">
+                    Live Audit Feed
+                  </span>
+                </div>
+                <h1 className="text-xl sm:text-2xl font-black text-white tracking-tight mt-1">
+                  Municipal Operations Command Center
+                </h1>
+                <p className="text-xs text-zinc-400 mt-0.5">
+                  DMAUD • Urban Local Bodies Smart Sanitation &amp; Anti-Fraud Grid
+                </p>
+              </div>
+            </div>
+
+            {/* Right: City Filters & Full Screen HUD */}
+            <div className="flex flex-wrap items-center gap-2.5 self-start lg:self-auto">
+              <div className="flex items-center gap-1 rounded-xl bg-zinc-900/90 p-1 border border-zinc-800 text-xs">
+                {['ALL', 'Hyderabad', 'Bengaluru', 'Delhi'].map((c) => {
+                  const count =
+                    c === 'ALL'
+                      ? reports.length
+                      : reports.filter((r) => r.city.toLowerCase() === c.toLowerCase()).length;
+                  return (
+                    <button
+                      key={c}
+                      onClick={() => setCityFilter(c)}
+                      className={`flex items-center gap-1.5 rounded-lg px-3 py-1.5 font-medium transition-all ${
+                        cityFilter === c
+                          ? 'bg-emerald-600 text-white shadow-sm font-semibold'
+                          : 'text-zinc-400 hover:text-white hover:bg-zinc-800/60'
+                      }`}
+                    >
+                      <span>{c}</span>
+                      <span
+                        className={`text-[10px] font-mono rounded-full px-1.5 py-0.2 ${
+                          cityFilter === c ? 'bg-black/30 text-emerald-200' : 'bg-zinc-800 text-zinc-400'
+                        }`}
+                      >
+                        {count}
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
+
+              <button
+                onClick={toggleFullscreen}
+                className={`flex items-center gap-1.5 rounded-xl px-3.5 py-2 text-xs font-semibold shadow-sm transition-all border ${
+                  isFullscreen
+                    ? 'bg-amber-500/10 hover:bg-amber-500/20 text-amber-300 border-amber-500/40'
+                    : 'bg-zinc-900 hover:bg-zinc-800 text-zinc-300 hover:text-white border-zinc-700/80 hover:border-emerald-500/40'
+                }`}
+                title={isFullscreen ? 'Exit Full Screen mode (ESC)' : 'Enter Full Screen Command Center mode'}
+              >
+                {isFullscreen ? (
+                  <>
+                    <Minimize2 className="h-3.5 w-3.5 text-amber-400" />
+                    <span>Exit Full Screen</span>
+                    <kbd className="ml-1 rounded bg-black/50 px-1.5 py-0.5 text-[9px] font-mono text-amber-300 border border-amber-500/30">
+                      ESC
+                    </kbd>
+                  </>
+                ) : (
+                  <>
+                    <Maximize2 className="h-3.5 w-3.5 text-emerald-400" />
+                    <span>Full Screen</span>
+                    <kbd className="ml-1 rounded bg-black/50 px-1.5 py-0.5 text-[9px] font-mono text-zinc-400 border border-zinc-800">
+                      HUD
+                    </kbd>
+                  </>
+                )}
+              </button>
+            </div>
+          </div>
+        </div>
 
         {/* Filter Bar */}
         <div className="flex flex-col md:flex-row gap-3 items-center justify-between bg-zinc-950/80 p-3.5 rounded-2xl border border-zinc-800">
@@ -429,6 +423,11 @@ export default function DashboardPage() {
             />
           </div>
         )}
+
+        {/* Real-Time Municipal Escrow & Audit Metrics Summary Card (At Bottom of Page) */}
+        <div className="pt-4">
+          <StatsBanner metrics={metrics} />
+        </div>
       </main>
 
       <GenRTIModal
