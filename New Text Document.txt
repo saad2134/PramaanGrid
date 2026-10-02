@@ -1,0 +1,115 @@
+
+AI First Product Builder Hackathon · 2026
+HACKATHON to
+Solve India's
+Garbage Problem
+Use AI to build a cleaner Bharat
+
+150,000 tonnes of waste every day - and the systems to handle it are broken. Build AI-first products that fix what's missing. Software, hardware, or both.
+
+Open to students and adults of all experience levels.
+🏁
+Submission Deadline: Oct 10, 2026 · 8:00 PM IST
+Sanitation worker sorting waste on an Indian street at dawn
+150K
+tonnes of waste generated in India - every single day
+40%
+of India's waste goes uncollected - ending up on streets and drains
+3,000+
+cities with open dump sites contaminating soil and groundwater
+1.5L+
+waste pickers with no formal income security or safety protection
+The problem
+It's not a cleanliness issue.
+It's a systems failure.
+Street scene with overflowing waste bins in an Indian neighbourhoodIndia - 150,000 tonnes of solid waste per day
+Streets overflow not because nobody wants them clean - but because reporting a dirty drain leads nowhere. Kids litter not because they're careless, but because civic responsibility was never made meaningful to them.
+
+Technology can close these gaps. That's what this hackathon asks you to build.
+Whether you're a high schooler who wants to wire up a sensor or a college student building a full-stack product - there's a place for your solution here.
+
+What you can build
+Six tracks. One urgent mission.
+Pick one track or combine them. The best products often sit at the intersection of two.
+
+Civic education & behaviour change
+🏫
+Track 01
+Civic education & behaviour change
+Gamified apps, classroom tools, and community platforms that make civic sense stick - from school children to parents to whole neighbourhoods.
+Schools · Awareness · Gamification
+Street & neighbourhood action
+🧹
+Track 02
+Street & neighbourhood action
+Citizen reporting tools, clean-up drive coordinators, volunteer platforms, and real-time cleanliness maps of localities.
+Reporting · Maps · Community
+Waste collection & segregation
+🗑️
+Track 03
+Waste collection & segregation
+Smarter bins, route optimisation for garbage trucks, AI-guided at-source segregation, and household pickup scheduling apps.
+IoT · Routing · Segregation
+Drain & infrastructure maintenance
+🌊
+Track 04
+Drain & infrastructure maintenance
+Detect, clean, and prevent drain blockages before flooding. Monitor encroached water bodies and enable community-powered infrastructure audits using computer vision.
+Sensors · CV · Prevention
+Recycling & circular economy
+♻️
+Track 05
+Recycling & circular economy
+Connect households to kabaddi walas, identify recyclables from photos, and build platforms that make waste pickers more efficient and better paid.
+Marketplace · Material ID · Livelihoods
+Hardware & IoT builds
+⚙️
+Track 06
+Hardware & IoT builds
+Smart dustbins, drain sensors, litter-detecting devices, solar compactors. Hardware + software combos are explicitly welcome and judged by domain experts.
+Arduino · Raspberry Pi · Sensors
+Not just software
+You can build physical things.
+Wire up an Arduino, prototype a smart bin, attach a sensor to a drain - it's all fair game. A working hardware prototype paired with an app or dashboard is a fully competitive submission in every division.
+
+🔌
+Supported hardware
+Raspberry Pi, Arduino, ESP32, NodeMCU - any microcontroller or sensor setup works
+🎥
+Two videos required
+A project demo showing the hardware working end-to-end, plus a system design walkthrough.
+📁
+Code + circuit diagram
+Push your firmware/software code to a public GitHub repo with a README explaining the setup.
+⚖️
+Expert judges
+Judges include domain experts who understand hardware constraints and tradeoffs
+Uploads or third-party links both work, no minor needs to create a third-party account.
+
+Fair for everyone
+One event. Three divisions.
+You're judged among your peers. A high schooler is never compared to a working professional.
+
+High school students building
+High School
+A real product with a real flow.
+Grades 9–12. A functional product a real user could try. Technical depth matters. Hardware + software combinations are strongly encouraged.
+College students collaborating
+College
+End-to-end. Real data. Ship it.
+Current college students. Complete product with working AI, real data, and a credible deployment plan. Judges probe feasibility in the live demo.
+Working professionals collaborating
+Others
+No limits. Full rigor.
+Any college graduate or working professional. Held to the highest bar - production-grade execution, real users, and a credible path to shipping.
+Registration is open · Free
+Build something
+India needs.
+Register on College.dev, start building from Jul 20, 2026. Submit by Oct 10, 2026 · 8:00 PM IST.
+
+Important: Participants under 18 must be registered by a parent or legal guardian. Project submissions may be shared with judges and may be publicly showcased. Do not submit confidential information, personal data, private credentials or material you do not have the right to share. Registration is subject to the , , ,  and .
+
+College.dev is operated by Wonksknow Technologies India Private Limited
+Wolfpack Workspaces, #39, 8th Main Road, Vasanth Nagar, Bengaluru - 560052 +91-7899217483
+COPYRIGHT © 2026, Wonksknow Technologies India Private Limited.
+ALL RIGHTS RESERVED.
