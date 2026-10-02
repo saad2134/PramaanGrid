@@ -1,4 +1,4 @@
-# 🏆 PramaanGrid (प्रमाण-�-्रिड) — The Civic Trust Protocol
+# 🏆 PramaanGrid (प्रमाण-ग्रिड) - The Civic Trust Protocol
 ### *The Anti-Fraud Proof-of-Clearance Protocol for Civic Operations*
 
 [![Next.js 16](https://img.shields.io/badge/Next.js-16.3.8-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
@@ -6,11 +6,10 @@
 [![Google Gemini](https://img.shields.io/badge/Google_Gemini-3.5_Flash-4285F4?style=for-the-badge&logo=google)](https://ai.google.dev/)
 [![FLUX.1](https://img.shields.io/badge/FLUX.1_Fill-Inpainting-FF6B6B?style=for-the-badge)](https://replicate.com/)
 [![Supabase](https://img.shields.io/badge/Supabase-PostGIS-3ECF8E?style=for-the-badge&logo=supabase)](https://supabase.com/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-emerald?style=for-the-badge)](./LICENSE)
+[![License: GPL-3.0](https://img.shields.io/badge/License-GPL--3.0-emerald?style=for-the-badge)](./LICENSE)
 
 > Built for the **AI First Product Builder Hackathon 2026** by college.dev & Wonksknow Technologies.  
 > **Theme**: *"Use AI to build a cleaner Bharat"*  
-> **Submission Deadline**: October 10, 2026 · 8:00 PM IST  
 > **Developer**: [Saad](https://github.com/saad2134) (Osmania University / MCET Hyderabad)
 
 ---
@@ -42,7 +41,7 @@ Across India:
 
 ---
 
-## �-️ System Architecture
+## 🏗️ System Architecture
 
 ```mermaid
 flowchart TD
@@ -161,11 +160,11 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 - Select ticket `#REP-BLR-03` and click **"Simulate Real Cleanup"**:
   - Distance offset: **6.8 meters** (within 35m tolerance).
   - VLM identifies compound wall, storm drain grate, and kerb.
-  - Result: `✅ VERIFIED` — Contractor payment of ₹4,500 authorized!
+  - Result: `✅ VERIFIED` - Contractor payment of ₹4,500 authorized!
 - Now select `#REP-BLR-04` and click **"Simulate Fraud Attempt"**:
   - Distance offset: **3,420 meters (3.42 km)**!
   - VLM detects structural mismatch (contractor submitted photo from an unrelated location).
-  - Result: `🚨 FRAUD DETECTED` — Contractor payout of ₹8,500 **FROZEN**!
+  - Result: `🚨 FRAUD DETECTED` - Contractor payout of ₹8,500 **FROZEN**!
 
 ### Step 3: Municipal Operations Command Center
 - Navigate to **"Command Center"** ([/dashboard](http://localhost:3000/dashboard)).
