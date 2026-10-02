@@ -1,4 +1,4 @@
-# 🏆 PramaanGrid (प्रमाण-ग्रिड) — The Civic Trust Protocol
+# 🏆 PramaanGrid (प्रमाण-�-्रिड) — The Civic Trust Protocol
 ### *The Anti-Fraud Proof-of-Clearance Protocol for Civic Operations*
 
 [![Next.js 16](https://img.shields.io/badge/Next.js-16.3.8-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
@@ -42,7 +42,7 @@ Across India:
 
 ---
 
-## 🏗️ System Architecture
+## �-️ System Architecture
 
 ```mermaid
 flowchart TD
@@ -177,4 +177,4 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ## 📜 License
 
-Distributed under the MIT License. See [`LICENSE`](./LICENSE) for more information.
+Distributed under the GNU General Public License v3.0 (GPL-3.0). See [`LICENSE`](./LICENSE) for more information.

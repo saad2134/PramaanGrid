@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "PramaanGrid (प्रमाण-ग्रिड) — Anti-Fraud Proof-of-Clearance Protocol",
+  title: "PramaanGrid (प्रमाण-ग्रिड) - Anti-Fraud Proof-of-Clearance Protocol",
   description: "The algorithmic Proof-of-Clearance and civic trust protocol for Indian municipal waste management and infrastructure.",
   icons: {
     icon: "/icon.png",

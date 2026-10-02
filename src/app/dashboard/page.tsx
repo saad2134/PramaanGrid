@@ -286,7 +286,7 @@ export default function DashboardPage() {
                 <h2 className="text-xl font-bold text-white flex items-center gap-2 mt-0.5">
                   <span>#{selectedReport.id}</span>
                   <span className="text-zinc-400 text-sm font-normal">
-                    — {selectedReport.address} ({selectedReport.city})
+                    - {selectedReport.address} ({selectedReport.city})
                   </span>
                 </h2>
               </div>

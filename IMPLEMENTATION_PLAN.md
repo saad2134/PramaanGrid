@@ -1,4 +1,4 @@
-# 🏆 PramaanGrid (प्रमाण-ग्रिड) — The Civic Trust Protocol
+# 🏆 PramaanGrid (प्रमाण-�-्रिड) — The Civic Trust Protocol
 ## *The Anti-Fraud Proof-of-Clearance Protocol for Civic Operations*
 
 > **AI First Product Builder Hackathon 2026** — Solve India's Garbage Problem
@@ -62,7 +62,7 @@ Dry dashboards don't win hackathons. By using GenAI to show the judge's *actual*
 ## Product Specification
 
 ### Product Name
-**Nagar-Drishti (नगर-दृष्टि)** — "City Vision"
+**Nagar-Drishti (न�-र-दृष्टि)** — "City Vision"
 
 ### Tagline
 *"See the potential. Verify the truth."*
@@ -73,7 +73,7 @@ Dry dashboards don't win hackathons. By using GenAI to show the judge's *actual*
 flowchart LR
     A["👤 Citizen"] -->|"1. WhatsApp photo + 📍"| B["📱 Bot"]
     B -->|"2. Instant ACK"| A
-    B -->|"3. Async Queue"| C["🤖 AI Pipeline"]
+    B -->|"3. Async Queue"| C["�- AI Pipeline"]
     C -->|"4a. Troll Filter"| D{"Civic Issue?"}
     D -->|"❌ No"| E["Reply: Not valid"]
     D -->|"✅ Yes"| F["🎨 GenAI Clean Vision"]
@@ -263,7 +263,7 @@ CREATE INDEX idx_reports_location ON reports USING GIST(location);
 > [!CAUTION]
 > **Each day assumes 8-10 focused hours of coding. Buffer is built into Days 7-8.**
 
-### Day 1 (Oct 3): Foundation 🏗️
+### Day 1 (Oct 3): Foundation �-️
 - [ ] Initialize Next.js 16 project with TypeScript + Tailwind CSS v4 + shadcn/ui
 - [ ] Set up Supabase project (DB schema with explicit `GRANT`, storage bucket, PostGIS extension)
 - [ ] Set up Twilio WhatsApp sandbox
@@ -271,7 +271,7 @@ CREATE INDEX idx_reports_location ON reports USING GIST(location);
 - [ ] Set up Inngest for background jobs
 - **Deliverable**: Sending a WhatsApp message → bot replies "Received!"
 
-### Day 2 (Oct 4): AI Pipeline 🤖
+### Day 2 (Oct 4): AI Pipeline �-
 - [ ] Integrate Gemini 3.5 Flash API (structured JSON output mode)
 - [ ] Build classification prompt: "Is this a civic issue? Categories: garbage/drain/pothole/other"
 - [ ] Build privacy filter: detect faces/plates, generate blur coordinates
@@ -381,7 +381,7 @@ Bot instantly replies: "This doesn't look like a civic issue. Please send a phot
 
 "Nagar-Drishti doesn't require citizens to download an app — just WhatsApp. It doesn't require workers to learn new tools — just take a photo. But it makes fraud **impossible**."
 
-"नगर-दृष्टि — See the potential. Verify the truth."
+"न�-र-दृष्टि — See the potential. Verify the truth."
 ````
 
 ### System Design Walkthrough Video (3-5 Minutes)
@@ -440,9 +440,9 @@ This solution was forged through **6 rounds of multi-agent adversarial debate**:
 
 | Round | Agents | Key Contribution |
 |-------|--------|-----------------|
-| **R1: Innovation** | 2× Innovators (parallel) | Generated 6 initial ideas: ScrapMarket.ai, Kabaad.ai, DrainGuard, Swachh-RL, Gen-RTI, Swachh-Twin |
-| **R2: Critique** | 2× Critics (parallel) | Destroyed scrap marketplace ideas ("capitalism already solves this"). Proposed Proof-of-Clearance pivot & B2G targeting |
-| **R3: Synthesis** | 2× Synthesizers (parallel) | Created Nagar-Grid (9.5/10) and Prabhav.ai (9.3/10) as competing finalists |
+| **R1: Innovation** | 2�- Innovators (parallel) | Generated 6 initial ideas: ScrapMarket.ai, Kabaad.ai, DrainGuard, Swachh-RL, Gen-RTI, Swachh-Twin |
+| **R2: Critique** | 2�- Critics (parallel) | Destroyed scrap marketplace ideas ("capitalism already solves this"). Proposed Proof-of-Clearance pivot & B2G targeting |
+| **R3: Synthesis** | 2�- Synthesizers (parallel) | Created Nagar-Grid (9.5/10) and Prabhav.ai (9.3/10) as competing finalists |
 | **R4: Final Showdown** | Arbiter + Feasibility Auditor | Hybrid: Nagar-Drishti (9.7/10). Detailed 8-day build plan with risk assessment |
 | **R5: Destruction** | Destroyer agent | Found 6 critical flaws. All mitigated. Survived at 9.0/10. READY_TO_SHIP. |
 | **R6: Architecture** | Final Architect | Definitive spec with exact tech stack, schema, demo script, narrative |

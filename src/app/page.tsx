@@ -79,7 +79,7 @@ export default function Home() {
 
       <main className="flex-1">
         {/* ============================================================
-            HERO SECTION — Left/Right High-Impact Layout
+            HERO SECTION - Left/Right High-Impact Layout
             ============================================================ */}
         <section className="relative overflow-hidden pt-12 pb-16 lg:py-20 border-b border-white/[0.06] bg-mesh-dark">
           {/* Animated Ambient Particles (inspired by Attenomy) */}
@@ -119,51 +119,59 @@ export default function Home() {
                 </p>
 
                 {/* Call-to-Action Buttons */}
-                <div className="mt-8 flex flex-wrap items-center gap-3.5 w-full sm:w-auto">
+                <div className="mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full">
+                  {/* Primary Action: Launch WhatsApp Simulator */}
                   <button
-                    onClick={() => setActiveTab('simulator')}
-                    className="flex items-center justify-center gap-2 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-black px-6 py-3 text-xs sm:text-sm font-bold shadow-lg shadow-emerald-500/25 transition-all hover:scale-[1.02] active:scale-[0.98]"
+                    onClick={() => {
+                      setActiveTab('simulator');
+                      const el = document.getElementById('workspace');
+                      el?.scrollIntoView({ behavior: 'smooth' });
+                    }}
+                    className="relative group flex items-center justify-center gap-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-black px-6 py-3.5 text-xs sm:text-sm font-bold shadow-xl shadow-emerald-500/25 transition-all duration-200 hover:scale-[1.02] active:scale-[0.98]"
                   >
-                    <Smartphone className="h-4 w-4" />
+                    <Smartphone className="h-4 w-4 shrink-0 transition-transform group-hover:rotate-12" />
                     <span>Launch WhatsApp Simulator</span>
+                    <span className="ml-1 text-[10px] font-mono bg-black/15 px-1.5 py-0.5 rounded text-emerald-950">
+                      Citizen POV
+                    </span>
                   </button>
 
+                  {/* Secondary Action: Test Fraud Interception */}
                   <button
-                    onClick={() => setActiveTab('verifier')}
-                    className="flex items-center justify-center gap-2 rounded-xl bg-white/[0.06] hover:bg-white/[0.1] text-white border border-white/[0.12] px-6 py-3 text-xs sm:text-sm font-semibold transition-all hover:scale-[1.02] active:scale-[0.98]"
+                    onClick={() => {
+                      setActiveTab('verifier');
+                      const el = document.getElementById('workspace');
+                      el?.scrollIntoView({ behavior: 'smooth' });
+                    }}
+                    className="group flex items-center justify-center gap-2 rounded-xl bg-white/[0.05] hover:bg-white/[0.09] text-white border border-white/[0.12] hover:border-rose-500/40 px-5 py-3.5 text-xs sm:text-sm font-semibold transition-all duration-200 hover:scale-[1.02] active:scale-[0.98]"
                   >
-                    <ShieldAlert className="h-4 w-4 text-rose-400" />
+                    <ShieldAlert className="h-4 w-4 text-rose-400 shrink-0 group-hover:scale-110 transition-transform" />
                     <span>Test Fraud Interception</span>
                   </button>
 
+                  {/* Tertiary Action: Municipal Command Center */}
                   <a
                     href="/dashboard"
-                    className="flex items-center justify-center gap-1.5 rounded-xl bg-transparent hover:bg-white/[0.05] text-zinc-400 hover:text-white px-4 py-3 text-xs sm:text-sm font-medium transition-colors"
+                    className="group inline-flex items-center justify-center gap-1.5 rounded-xl bg-white/[0.03] hover:bg-white/[0.07] text-zinc-300 hover:text-white border border-white/[0.08] px-4 py-3.5 text-xs sm:text-sm font-medium transition-all duration-200"
                   >
                     <span>Command Center</span>
-                    <ArrowUpRight className="h-3.5 w-3.5 text-zinc-500" />
+                    <ArrowUpRight className="h-3.5 w-3.5 text-zinc-400 group-hover:text-emerald-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
                   </a>
                 </div>
 
-                {/* Live Trust Metrics Row */}
-                <div className="mt-8 pt-6 border-t border-white/[0.08] grid grid-cols-3 gap-4 w-full max-w-lg">
-                  <div>
-                    <span className="text-xl sm:text-2xl font-black text-white font-mono block">
-                      ₹{(metrics.taxpayer_money_saved_inr / 100000).toFixed(2)}L
-                    </span>
-                    <span className="text-[11px] text-zinc-400 font-medium">Funds Protected</span>
+                {/* Key Protocol Guarantees (replaces duplicate mini stats) */}
+                <div className="mt-7 pt-5 border-t border-white/[0.08] flex flex-wrap items-center gap-x-6 gap-y-2 text-xs text-zinc-400">
+                  <div className="flex items-center gap-1.5">
+                    <span className="flex h-1.5 w-1.5 rounded-full bg-emerald-400" />
+                    <span>Zero citizen app download</span>
                   </div>
-                  <div>
-                    <span className="text-xl sm:text-2xl font-black text-rose-400 font-mono block">
-                      {metrics.fraud_blocked_count}
-                    </span>
-                    <span className="text-[11px] text-zinc-400 font-medium">Frauds Blocked</span>
+                  <div className="flex items-center gap-1.5">
+                    <span className="flex h-1.5 w-1.5 rounded-full bg-rose-400" />
+                    <span>Cryptographic contractor escrow</span>
                   </div>
-                  <div>
-                    <span className="text-xl sm:text-2xl font-black text-emerald-400 font-mono block">
-                      12 Hours
-                    </span>
-                    <span className="text-[11px] text-zinc-400 font-medium">Statutory SLA</span>
+                  <div className="flex items-center gap-1.5">
+                    <span className="flex h-1.5 w-1.5 rounded-full bg-cyan-400" />
+                    <span>Free &amp; Open Source (GPL v3)</span>
                   </div>
                 </div>
               </div>
@@ -333,9 +341,9 @@ export default function Home() {
         </section>
 
         {/* ============================================================
-            INTERACTIVE WORKSPACE — Wrapped in MockupFrame with BorderBeam
+            INTERACTIVE WORKSPACE - Wrapped in MockupFrame with BorderBeam
             ============================================================ */}
-        <section className="py-14 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <section id="workspace" className="py-14 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 scroll-mt-24">
           <div className="flex flex-col items-center mb-8">
             {/* Tab Selector */}
             <div className="inline-flex rounded-2xl bg-white/[0.04] p-1.5 border border-white/[0.08] shadow-2xl overflow-x-auto max-w-full">
@@ -417,7 +425,7 @@ export default function Home() {
                         Zero-Friction Ingestion with GenAI &quot;Vision of Tomorrow&quot;
                       </h2>
                       <p className="mt-2 text-xs sm:text-sm text-zinc-400 leading-relaxed">
-                        Most civic apps fail because citizens refuse to download 80MB government portals that log out constantly. PramaanGrid runs natively on WhatsApp — the tool 500 million Indians already trust and use daily.
+                        Most civic apps fail because citizens refuse to download 80MB government portals that log out constantly. PramaanGrid runs natively on WhatsApp: the tool 500 million Indians already trust and use daily.
                       </p>
                     </div>
 
@@ -672,7 +680,7 @@ export default function Home() {
         </section>
 
         {/* ============================================================
-            BENTO GRID SECTION — MagicBento Inspired Polish
+            BENTO GRID SECTION - MagicBento Inspired Polish
             ============================================================ */}
         <BentoGrid />
       </main>

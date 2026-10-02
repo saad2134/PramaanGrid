@@ -214,8 +214,8 @@ export default function ProofVerifier({
               <div>
                 <h4 className="font-bold text-sm tracking-tight">
                   {currentProof.verification_status === 'VERIFIED'
-                    ? 'VERIFICATION PASSED — AUTHENTIC ON-SITE CLEARANCE'
-                    : 'FRAUD INTERCEPTED — CONTRACTOR PAYMENT FROZEN'}
+                    ? 'VERIFICATION PASSED: AUTHENTIC ON-SITE CLEARANCE'
+                    : 'FRAUD INTERCEPTED: CONTRACTOR PAYMENT FROZEN'}
                 </h4>
                 <p className="text-xs opacity-80">
                   Contractor: {currentProof.contractor_name} ({currentProof.worker_name})
