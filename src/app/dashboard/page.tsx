@@ -45,6 +45,7 @@ export default function DashboardPage() {
         setReports(json.data);
         if (json.metrics) setMetrics(json.metrics);
         if (json.proofs) setProofs(json.proofs);
+        setSelectedReport((prev) => json.data.find((r: Report) => r.id === prev.id) || json.data[0]);
       }
     } catch (e) {
       console.error('Failed to fetch dashboard reports:', e);

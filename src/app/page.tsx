@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import TopBanner from '@/components/TopBanner';
 import Navbar from '@/components/Navbar';
 import StatsBanner from '@/components/StatsBanner';
@@ -27,11 +27,12 @@ import {
   Radar,
   Sparkles,
 } from 'lucide-react';
-import { Report, CivicMetrics } from '@/types';
+import { Report, CivicMetrics, ClearanceProof } from '@/types';
 import { INITIAL_METRICS, INITIAL_REPORTS } from '@/lib/demo-data';
 
 export default function Home() {
   const [reports, setReports] = useState<Report[]>(INITIAL_REPORTS);
+  const [proofs, setProofs] = useState<ClearanceProof[]>([]);
   const [metrics, setMetrics] = useState<CivicMetrics>(INITIAL_METRICS);
   const [selectedReport, setSelectedReport] = useState<Report>(INITIAL_REPORTS[0]);
   const [activeTab, setActiveTab] = useState<'simulator' | 'verifier' | 'map' | 'architecture'>('simulator');
@@ -49,13 +50,17 @@ export default function Home() {
       if (json.success && json.data) {
         setReports(json.data);
         if (json.metrics) setMetrics(json.metrics);
-        const updatedSelected = json.data.find((r: Report) => r.id === selectedReport.id);
-        if (updatedSelected) setSelectedReport(updatedSelected);
+        if (json.proofs) setProofs(json.proofs);
+        setSelectedReport((prev) => json.data.find((r: Report) => r.id === prev.id) || json.data[0]);
       }
     } catch (e) {
       console.error('Failed to refresh live data:', e);
     }
   };
+
+  useEffect(() => {
+    refreshData();
+  }, []);
 
   const handleResetDemo = async () => {
     setIsResetting(true);
@@ -219,7 +224,7 @@ export default function Home() {
                         src={
                           heroAuditMode === 'legit'
                             ? '/demo/banjara-clean.jpg'
-                            : 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80'
+                            : '/demo/fraud-remote-site.jpg'
                         }
                         alt="After Cleanup"
                         className="h-28 w-full object-cover"
@@ -495,6 +500,7 @@ export default function Home() {
 
                   <ProofVerifier
                     report={selectedReport}
+                    existingProof={proofs.find((p) => p.report_id === selectedReport.id)}
                     onVerified={refreshData}
                   />
                 </div>

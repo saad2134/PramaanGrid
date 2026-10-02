@@ -49,8 +49,7 @@ export default function ProofVerifier({
     },
     fraud: {
       title: 'Contractor Ghost Cleanup (Fraudulent Remote Photo)',
-      afterUrl:
-        'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=900&q=80',
+      afterUrl: '/demo/fraud-remote-site.jpg',
       lat: report.lat + 0.031, // ~3,420 meters (3.4 km) away!
       lng: report.lng + 0.024,
       workerName: 'Vikram Singh (Concessionaire Proxy)',

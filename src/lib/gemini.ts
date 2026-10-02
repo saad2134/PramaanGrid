@@ -111,7 +111,7 @@ CRITICAL RULES:
 export async function verifyProofOfClearance(
   beforeImageBase64: string,
   afterImageBase64: string,
-  context: { category?: string; lat?: number; lng?: number } = {}
+  context: { category?: string; lat?: number; lng?: number; reportId?: string; isFraud?: boolean } = {}
 ): Promise<{
   isClear: boolean;
   vlmConfidence: number;
@@ -119,8 +119,11 @@ export async function verifyProofOfClearance(
   explanation: string;
   fraudAlert?: string;
 }> {
-  if (!aiClient || (process.env.DEMO_MODE === 'true' && !apiKey)) {
-    return generateSimulatedProofOfClearance(beforeImageBase64, afterImageBase64);
+  const isBase64Before = beforeImageBase64.startsWith('data:image/') || beforeImageBase64.length > 500;
+  const isBase64After = afterImageBase64.startsWith('data:image/') || afterImageBase64.length > 500;
+
+  if (!aiClient || (process.env.DEMO_MODE === 'true' && !apiKey) || !isBase64Before || !isBase64After) {
+    return generateSimulatedProofOfClearance(beforeImageBase64, afterImageBase64, context);
   }
 
   try {
@@ -200,7 +203,7 @@ RULES:
     };
   } catch (error) {
     console.error('Gemini verifyProofOfClearance error:', error);
-    return generateSimulatedProofOfClearance(beforeImageBase64, afterImageBase64);
+    return generateSimulatedProofOfClearance(beforeImageBase64, afterImageBase64, context);
   }
 }
 
@@ -252,7 +255,8 @@ function generateSimulatedTriage(image: string, notes: string): AITriageResult {
 
 function generateSimulatedProofOfClearance(
   before: string,
-  after: string
+  after: string,
+  context: { category?: string; reportId?: string; isFraud?: boolean } = {}
 ): {
   isClear: boolean;
   vlmConfidence: number;
@@ -260,30 +264,179 @@ function generateSimulatedProofOfClearance(
   explanation: string;
   fraudAlert?: string;
 } {
+  const isFraud =
+    context.isFraud ||
+    after.includes('fraud') ||
+    after.includes('unsplash') ||
+    after.includes('beach') ||
+    after.includes('remote') ||
+    (before === after);
+
+  if (isFraud) {
+    return {
+      isClear: false,
+      vlmConfidence: 0.99,
+      landmarkMatches: [
+        {
+          landmark: 'Reported roadway curb and drainage grating',
+          before_pos: 'Foreground center (present in report)',
+          after_pos: 'Missing entirely in submitted photo',
+          matched: false,
+        },
+        {
+          landmark: 'Boundary wall structure and compound line',
+          before_pos: 'Visible across horizon in report',
+          after_pos: 'Unrelated private terrain (0% geometric correlation)',
+          matched: false,
+        },
+        {
+          landmark: 'Civic utility post and municipal kerb line',
+          before_pos: 'Right margin',
+          after_pos: 'Absent (photo captured at alternate remote location)',
+          matched: false,
+        },
+      ],
+      explanation:
+        'CRITICAL VLM AUDIT ALERT: Visual landmark triangulation detected 0% geometric correspondence with the reported civic blackspot. Photo appears to be captured at an alternate remote location. Payment frozen.',
+      fraudAlert: 'LANDMARK_MISMATCH_FRAUD: Contractor submitted photographic evidence from an unrelated remote site.',
+    };
+  }
+
+  const reportId = context.reportId || '';
+  if (reportId.includes('HYD-01')) {
+    return {
+      isClear: true,
+      vlmConfidence: 0.98,
+      landmarkMatches: [
+        {
+          landmark: 'Road No. 12 concrete culvert curb',
+          before_pos: 'Foreground center (choked with debris)',
+          after_pos: 'Foreground center (100% evacuated and washed)',
+          matched: true,
+        },
+        {
+          landmark: 'MLA Colony boundary wall masonry',
+          before_pos: 'Left background',
+          after_pos: 'Left background (unchanged geometry)',
+          matched: true,
+        },
+        {
+          landmark: 'Roadside asphalt pavement edge',
+          before_pos: 'Right roadway margin',
+          after_pos: 'Right roadway margin (swept clean)',
+          matched: true,
+        },
+      ],
+      explanation:
+        'VLM verified 3 structural anchors with 98% spatial correlation. 100% of single-use LDPE plastics and rubble cleared from Road 12 culvert. Proof-of-Clearance approved.',
+    };
+  } else if (reportId.includes('HYD-02')) {
+    return {
+      isClear: true,
+      vlmConfidence: 0.99,
+      landmarkMatches: [
+        {
+          landmark: 'Mecca Masjid outer gateway arch',
+          before_pos: 'Left background',
+          after_pos: 'Left background',
+          matched: true,
+        },
+        {
+          landmark: 'Charminar minaret and central arch',
+          before_pos: 'Upper right background',
+          after_pos: 'Upper right background',
+          matched: true,
+        },
+        {
+          landmark: 'Yellow-black street curb line',
+          before_pos: 'Foreground edge (cluttered)',
+          after_pos: 'Foreground edge (spotless)',
+          matched: true,
+        },
+      ],
+      explanation:
+        'VLM confirmed geometric alignment with historic Charminar arch and Mecca Masjid masonry. Commercial cardboard and packaging debris completely evacuated. Work verified.',
+    };
+  } else if (reportId.includes('DEL-05')) {
+    return {
+      isClear: true,
+      vlmConfidence: 0.98,
+      landmarkMatches: [
+        {
+          landmark: 'Sharma General Store and Gupta Cloth House signboards',
+          before_pos: 'Upper left commercial facade',
+          after_pos: 'Upper left commercial facade',
+          matched: true,
+        },
+        {
+          landmark: 'Galaxy Electronics and fresh fruit shop fascia',
+          before_pos: 'Center upper row',
+          after_pos: 'Center upper row',
+          matched: true,
+        },
+        {
+          landmark: 'Concrete market perimeter pedestrian curb',
+          before_pos: 'Lower left (covered with crates)',
+          after_pos: 'Lower left (swept spotless)',
+          matched: true,
+        },
+      ],
+      explanation:
+        'VLM verified retail storefront signage and curbside geometry. 100% of organic vegetable waste and packaging refuse evacuated from market pedestrian perimeter.',
+    };
+  } else if (reportId.includes('BLR-03')) {
+    return {
+      isClear: true,
+      vlmConfidence: 0.98,
+      landmarkMatches: [
+        {
+          landmark: 'Yellow BDA boundary wall',
+          before_pos: 'Left background',
+          after_pos: 'Left background',
+          matched: true,
+        },
+        {
+          landmark: 'Cast-iron drain grill',
+          before_pos: 'Center channel (choked)',
+          after_pos: 'Center channel (unclogged)',
+          matched: true,
+        },
+        {
+          landmark: 'Sidewalk pavement kerb',
+          before_pos: 'Lower right edge',
+          after_pos: 'Lower right edge',
+          matched: true,
+        },
+      ],
+      explanation:
+        'VLM confirmed 3 structural anchors (compound wall, curb, storm drain grate). Complete debris evacuation verified.',
+    };
+  }
+
   return {
     isClear: true,
-    vlmConfidence: 0.96,
+    vlmConfidence: 0.97,
     landmarkMatches: [
       {
-        landmark: 'Perimeter compound wall & concrete pillar',
-        before_pos: 'North-West corner (x: 45, y: 110)',
-        after_pos: 'North-West corner (x: 48, y: 112)',
+        landmark: 'Perimeter compound wall and concrete pillar',
+        before_pos: 'Left background',
+        after_pos: 'Left background',
         matched: true,
       },
       {
-        landmark: 'Municipal stormwater chamber grate',
-        before_pos: 'Lower center channel (submerged in plastics)',
-        after_pos: 'Lower center channel (exposed & cleaned)',
+        landmark: 'Municipal stormwater chamber curb',
+        before_pos: 'Foreground center',
+        after_pos: 'Foreground center (cleaned)',
         matched: true,
       },
       {
-        landmark: 'Road curbing & utility pole base',
-        before_pos: 'East road margin',
-        after_pos: 'East road margin',
+        landmark: 'Road curbing and utility post',
+        before_pos: 'Right roadway margin',
+        after_pos: 'Right roadway margin',
         matched: true,
       },
     ],
     explanation:
-      'VLM verified 3 key architectural anchors across Before & After imagery with 96% structural alignment. 100% of detected polymer mass and organic debris successfully evacuated. Clearance verified.',
+      'VLM verified 3 key architectural anchors across Before and After imagery with 97% structural alignment. 100% of detected waste mass successfully evacuated. Clearance verified.',
   };
 }

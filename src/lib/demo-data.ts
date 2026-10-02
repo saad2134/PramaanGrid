@@ -316,8 +316,7 @@ export const INITIAL_CLEARANCE_PROOFS: ClearanceProof[] = [
   {
     id: 'PRF-FRAUD-02',
     report_id: 'REP-BLR-04',
-    after_image_url:
-      'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=900&q=80', // Photo of clean beach/lake taken elsewhere!
+    after_image_url: '/demo/fraud-remote-site.jpg', // Remote private patio/lawn photo taken elsewhere!
     worker_id: 'WRK-4109',
     worker_name: 'Vikram Singh (Apex Eco)',
     contractor_name: 'Apex Eco-Logistics Infra LLP',

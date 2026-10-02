@@ -5,34 +5,24 @@ import {
 } from './demo-data';
 import { Report, ClearanceProof, CivicMetrics, ReportStatus } from '@/types';
 
-// In-memory runtime cache for server-side API routes & dev mode
+// In-memory runtime cache for server-side API routes and dev mode
 class DataStore {
-  private reports: Report[] = [...INITIAL_REPORTS];
-  private proofs: ClearanceProof[] = [...INITIAL_CLEARANCE_PROOFS];
-  private metrics: CivicMetrics = { ...INITIAL_METRICS };
+  private reports: Report[];
+  private proofs: ClearanceProof[];
+  private metrics: CivicMetrics;
+
+  constructor() {
+    this.reports = INITIAL_REPORTS.map((r) => ({ ...r }));
+    this.proofs = INITIAL_CLEARANCE_PROOFS.map((p) => ({ ...p }));
+    this.metrics = { ...INITIAL_METRICS };
+  }
 
   getReports(): Report[] {
-    // Keep demo reports synchronized with latest static assets
-    INITIAL_REPORTS.forEach((initRep) => {
-      const existing = this.reports.find((r) => r.id === initRep.id);
-      if (existing) {
-        existing.original_image_url = initRep.original_image_url;
-        existing.ai_clean_image_url = initRep.ai_clean_image_url;
-        existing.status = initRep.status;
-        existing.severity = initRep.severity;
-        existing.address = initRep.address;
-        existing.ward = initRep.ward;
-        existing.description = initRep.description;
-        if (initRep.resolved_at) existing.resolved_at = initRep.resolved_at;
-      } else {
-        this.reports.push(initRep);
-      }
-    });
     return [...this.reports];
   }
 
   getReportById(id: string): Report | undefined {
-    return this.getReports().find((r) => r.id === id);
+    return this.reports.find((r) => r.id === id);
   }
 
   addReport(report: Report): Report {
@@ -53,12 +43,24 @@ class DataStore {
       resolved_at: resolvedAt || (status === 'RESOLVED' ? new Date().toISOString() : prev.resolved_at),
     };
 
-    if (prev.status === 'PENDING' && status === 'RESOLVED') {
-      this.metrics.pending_count = Math.max(0, this.metrics.pending_count - 1);
-      this.metrics.resolved_count += 1;
-    } else if (status === 'FRAUD' && prev.status !== 'FRAUD') {
-      this.metrics.fraud_blocked_count += 1;
-      this.metrics.taxpayer_money_saved_inr += 8500;
+    if (prev.status !== status) {
+      if (prev.status === 'PENDING') {
+        this.metrics.pending_count = Math.max(0, this.metrics.pending_count - 1);
+      } else if (prev.status === 'RESOLVED') {
+        this.metrics.resolved_count = Math.max(0, this.metrics.resolved_count - 1);
+      } else if (prev.status === 'FRAUD') {
+        this.metrics.fraud_blocked_count = Math.max(0, this.metrics.fraud_blocked_count - 1);
+        this.metrics.taxpayer_money_saved_inr = Math.max(0, this.metrics.taxpayer_money_saved_inr - 8500);
+      }
+
+      if (status === 'PENDING') {
+        this.metrics.pending_count += 1;
+      } else if (status === 'RESOLVED') {
+        this.metrics.resolved_count += 1;
+      } else if (status === 'FRAUD') {
+        this.metrics.fraud_blocked_count += 1;
+        this.metrics.taxpayer_money_saved_inr += 8500;
+      }
     }
 
     this.reports[idx] = updated;
@@ -66,15 +68,6 @@ class DataStore {
   }
 
   getProofs(): ClearanceProof[] {
-    // Keep demo proofs synchronized with latest static assets
-    INITIAL_CLEARANCE_PROOFS.forEach((initProof) => {
-      const existingIdx = this.proofs.findIndex((p) => p.id === initProof.id || p.report_id === initProof.report_id);
-      if (existingIdx >= 0) {
-        this.proofs[existingIdx] = initProof;
-      } else {
-        this.proofs.push(initProof);
-      }
-    });
     return [...this.proofs];
   }
 
@@ -108,10 +101,12 @@ class DataStore {
   }
 
   resetToDefault(): void {
-    this.reports = [...INITIAL_REPORTS];
-    this.proofs = [...INITIAL_CLEARANCE_PROOFS];
+    this.reports = INITIAL_REPORTS.map((r) => ({ ...r }));
+    this.proofs = INITIAL_CLEARANCE_PROOFS.map((p) => ({ ...p }));
     this.metrics = { ...INITIAL_METRICS };
   }
 }
 
-export const store = new DataStore();
+// Global singleton to prevent state loss across hot-reloads and route transitions
+const globalStore = globalThis as unknown as { __pramaanGridStore?: DataStore };
+export const store = globalStore.__pramaanGridStore ?? (globalStore.__pramaanGridStore = new DataStore());

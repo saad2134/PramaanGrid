@@ -57,7 +57,13 @@ export async function POST(request: NextRequest) {
     const vlmResult = await verifyProofOfClearance(
       report.original_image_url,
       effectiveAfterImage,
-      { category: report.category, lat: report.lat, lng: report.lng }
+      {
+        category: report.category,
+        lat: report.lat,
+        lng: report.lng,
+        reportId: report.id,
+        isFraud: !gpsResult.isMatch,
+      }
     );
 
     // 3. Synthesis & Fraud Decision Tree
@@ -70,7 +76,7 @@ export async function POST(request: NextRequest) {
       status = 'FRAUD_GPS_MISMATCH';
       isVerified = false;
       payoutStatus = 'HELD_FRAUD';
-      reason = `FRAUD DETECTED [GPS MISMATCH]: Image was captured ${gpsResult.distanceMeters}m away from reported coordinates. Contractor submitted invalid location proof.`;
+      reason = `FRAUD DETECTED [GPS MISMATCH]: Image was captured ${gpsResult.distanceMeters}m away from reported coordinates (exceeding 35m tolerance). Contractor submitted invalid location proof.`;
     } else if (!vlmResult.isClear || vlmResult.fraudAlert) {
       status = 'FRAUD_LANDMARK_MISMATCH';
       isVerified = false;
@@ -82,6 +88,10 @@ export async function POST(request: NextRequest) {
       payoutStatus = 'AUTHORIZED';
       reason = `PROOF-OF-CLEARANCE VERIFIED: GPS matched within ${gpsResult.distanceMeters}m. ${vlmResult.explanation}`;
     }
+
+    const finalLandmarks = isVerified
+      ? vlmResult.landmarkMatches
+      : vlmResult.landmarkMatches.map((lm) => ({ ...lm, matched: false }));
 
     // 4. Record Clearance Proof
     const proof: ClearanceProof = {
@@ -99,7 +109,7 @@ export async function POST(request: NextRequest) {
       verification_status: status,
       verification_reason: reason,
       vlm_confidence: vlmResult.vlmConfidence,
-      landmark_matches: vlmResult.landmarkMatches,
+      landmark_matches: finalLandmarks,
       payout_status: payoutStatus,
       payout_amount_inr: payoutAmountInr,
       created_at: new Date().toISOString(),
