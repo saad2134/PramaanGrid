@@ -1,4 +1,5 @@
-# 🏆 PramaanGrid (प्रमाण-ग्रिड) - The Civic Trust Protocol
+# ♻️ PramaanGrid (प्रमाण-ग्रिड) - The Civic Trust Protocol
+
 ### *The Anti-Fraud Proof-of-Clearance Protocol for Civic Operations*
 
 <p align="center">
@@ -27,6 +28,7 @@
 > *"It's not a cleanliness issue. It's a systems failure."*
 
 Across India:
+
 - **150,000 tonnes** of municipal solid waste are generated daily.
 - **40%** goes completely uncollected, choking storm drains and contaminating groundwater.
 - **₹500+ Crore** are spent annually by municipal corporations on waste contracts, yet city streets stay dirty.
@@ -103,47 +105,54 @@ flowchart TD
 
 ## ⚡ Tech Stack (Latest October 2026 Versions)
 
-| Component | Technology | Version | Purpose |
-|---|---|---|---|
-| **Framework** | Next.js (App Router) | **16.3.8** | Active LTS, Turbopack, Serverless API Routes |
-| **Styling** | Tailwind CSS | **v4.3.3** | Oxide engine, CSS-first `@theme` configuration |
-| **Multimodal AI** | Google Gemini | **3.5 / 2.5 Flash** | Sub-second classification, troll shield, VLM landmark audit |
-| **Generative Vision** | Replicate (FLUX.1) | **FLUX.1 Fill [dev]** | Photorealistic clean street inpainting |
-| **Database & GIS** | Supabase | **PostgreSQL + PostGIS** | Spatial radius queries, real-time sync, RLS security |
-| **Geodetic Engine** | Haversine Formula | **Custom TS** | Millimeter-accurate geodetic distance verification |
-| **Mapping** | Leaflet + React-Leaflet | **1.9.4** | Zero-token client-side GIS heatmap and cluster markers |
-| **Messaging** | Twilio WhatsApp API | **v4** | Zero-friction citizen reporting |
-| **Deployment** | Vercel | Edge | Global edge distribution |
+| Component             | Technology              | Version                  | Purpose                                                     |
+| --------------------- | ----------------------- | ------------------------ | ----------------------------------------------------------- |
+| **Framework**         | Next.js (App Router)    | **16.3.8**               | Active LTS, Turbopack, Serverless API Routes                |
+| **Styling**           | Tailwind CSS            | **v4.3.3**               | Oxide engine, CSS-first `@theme` configuration              |
+| **Multimodal AI**     | Google Gemini           | **3.5 / 2.5 Flash**      | Sub-second classification, troll shield, VLM landmark audit |
+| **Generative Vision** | Replicate (FLUX.1)      | **FLUX.1 Fill [dev]**    | Photorealistic clean street inpainting                      |
+| **Database & GIS**    | Supabase                | **PostgreSQL + PostGIS** | Spatial radius queries, real-time sync, RLS security        |
+| **Geodetic Engine**   | Haversine Formula       | **Custom TS**            | Millimeter-accurate geodetic distance verification          |
+| **Mapping**           | Leaflet + React-Leaflet | **1.9.4**                | Zero-token client-side GIS heatmap and cluster markers      |
+| **Messaging**         | Twilio WhatsApp API     | **v4**                   | Zero-friction citizen reporting                             |
+| **Deployment**        | Vercel                  | Edge                     | Global edge distribution                                    |
 
 ---
 
 ## 🚀 Quick Start (Running Locally)
 
 ### 1. Clone the repository
+
 ```bash
 git clone https://github.com/saad2134/pramaan-grid.git
 cd pramaan-grid
 ```
 
 ### 2. Install dependencies
+
 ```bash
 npm install
 ```
 
 ### 3. Configure environment variables
+
 Copy the example configuration:
+
 ```bash
 cp .env.example .env.local
 ```
+
 *(Note: PramaanGrid includes a built-in `DEMO_MODE=true` engine with pre-seeded datasets, so you can test the full end-to-end UI, maps, simulator, and fraud verifier immediately without setting up external API keys!)*
 
 To enable live AI inference, add your keys to `.env.local`:
+
 ```env
 GEMINI_API_KEY=your_google_ai_studio_key
 REPLICATE_API_TOKEN=your_replicate_token
 ```
 
 ### 4. Run the development server
+
 ```bash
 npm run dev
 ```
@@ -155,6 +164,7 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 ## 🎮 How to Demo PramaanGrid (Judge Walkthrough)
 
 ### Step 1: The Citizen WhatsApp Experience
+
 - On the homepage, click **"1. Citizen WhatsApp Gateway"**.
 - Try clicking **"🚨 Report Blackspot"** (Banjara Hills drain dump).
 - Notice the instant response:
@@ -164,6 +174,7 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 - Now click **"🐶 Test Troll Filter"**. Watch the AI immediately detect a pet/selfie and reject the submission, preserving municipal resources.
 
 ### Step 2: The Proof-of-Clearance Anti-Fraud Engine
+
 - Switch to **"2. Proof-of-Clearance Terminal"**.
 - Select ticket `#REP-BLR-03` and click **"Simulate Real Cleanup"**:
   - Distance offset: **6.8 meters** (within 35m tolerance).
@@ -175,6 +186,7 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
   - Result: `🚨 FRAUD DETECTED` - Contractor payout of ₹8,500 **FROZEN**!
 
 ### Step 3: Municipal Operations Command Center
+
 - Navigate to **"Command Center"** ([/dashboard](http://localhost:3000/dashboard)).
 - Filter by city (*Hyderabad*, *Bengaluru*, *Delhi*).
 - Inspect live blackspot clusters on the interactive GIS map.
