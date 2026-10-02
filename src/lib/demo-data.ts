@@ -50,10 +50,8 @@ export const INITIAL_REPORTS: Report[] = [
   {
     id: 'REP-HYD-02',
     phone_hash: '9194401*****',
-    original_image_url:
-      'https://images.unsplash.com/photo-1621451537084-482c73073a0f?auto=format&fit=crop&w=900&q=80',
-    ai_clean_image_url:
-      'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=900&q=80',
+    original_image_url: '/demo/charminar-dump.jpg',
+    ai_clean_image_url: '/demo/charminar-clean.jpg',
     lat: 17.3616,
     lng: 78.4747,
     address: 'Near Mecca Masjid Arch, Laad Bazaar',
@@ -61,10 +59,11 @@ export const INITIAL_REPORTS: Report[] = [
     city: 'Hyderabad',
     category: 'garbage',
     severity: 7,
-    status: 'ASSIGNED',
+    status: 'RESOLVED',
     description:
       'Commercial cardboard boxes and discarded retail plastic sacks dumped along heritage pedestrian corridor.',
     created_at: new Date(Date.now() - 11 * 3600 * 1000).toISOString(),
+    resolved_at: new Date(Date.now() - 2 * 3600 * 1000).toISOString(),
     assigned_contractor: 'Charminar Heritage Waste Services',
     ai_triage: {
       is_civic_issue: true,
@@ -154,10 +153,8 @@ export const INITIAL_REPORTS: Report[] = [
   {
     id: 'REP-DEL-05',
     phone_hash: '9198110*****',
-    original_image_url:
-      'https://images.unsplash.com/photo-1528323273322-d81458248d40?auto=format&fit=crop&w=900&q=80',
-    ai_clean_image_url:
-      'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=900&q=80',
+    original_image_url: '/demo/lajpat-dump.jpg',
+    ai_clean_image_url: '/demo/lajpat-clean.jpg',
     lat: 28.5672,
     lng: 77.2433,
     address: 'Block-D Market Perimeter, Lajpat Nagar Central Market',
@@ -165,10 +162,11 @@ export const INITIAL_REPORTS: Report[] = [
     city: 'Delhi',
     category: 'garbage',
     severity: 8,
-    status: 'PENDING',
+    status: 'RESOLVED',
     description:
-      'Untended commercial vegetable waste and rotting organic material ignored for over 72 hours.',
-    created_at: new Date(Date.now() - 74 * 3600 * 1000).toISOString(), // 74h ago -> Ready for Gen-RTI Escalation!
+      'Untended commercial vegetable waste, wooden crates, and packaging refuse cleared from market pedestrian zone.',
+    created_at: new Date(Date.now() - 24 * 3600 * 1000).toISOString(),
+    resolved_at: new Date(Date.now() - 6 * 3600 * 1000).toISOString(),
     assigned_contractor: 'Capital Municipal Concessionaire Ltd',
     ai_triage: {
       is_civic_issue: true,
@@ -178,19 +176,102 @@ export const INITIAL_REPORTS: Report[] = [
       hazard_level: 'HIGH',
       detected_materials: [
         'Wet organic waste',
-        'Rotting food packaging',
-        'Cartons',
+        'Wooden crates',
+        'Cardboard packaging',
+        'Plastic polybags',
       ],
       estimated_volume_m3: 3.5,
       troll_filter_passed: true,
       reasoning:
-        'SLA breached (>72 hours unaddressed). Eligible for automated Right to Information (RTI) legal notice generation.',
+        'High commercial market density zone. Daily clearance required under Delhi Municipal Act.',
     },
   },
 ];
 
 export const INITIAL_CLEARANCE_PROOFS: ClearanceProof[] = [
-  // 1. Legitimate Verified Clearance for REP-BLR-03
+  // 1. Legitimate Verified Clearance for REP-HYD-02 (Charminar / Laad Bazaar)
+  {
+    id: 'PRF-VERIFIED-HYD-02',
+    report_id: 'REP-HYD-02',
+    after_image_url: '/demo/charminar-clean.jpg',
+    worker_id: 'WRK-5120',
+    worker_name: 'Mohd. Ismail Qureshi',
+    contractor_name: 'Charminar Heritage Waste Services',
+    lat: 17.36164, // 5.2 meters offset
+    lng: 78.47473,
+    photo_timestamp: new Date(Date.now() - 2 * 3600 * 1000).toISOString(),
+    gps_distance_meters: 5.2,
+    is_verified: true,
+    verification_status: 'VERIFIED',
+    verification_reason:
+      'GPS coordinates match within 5.2m. Gemini VLM confirmed structural anchors (historic Charminar arch, Mecca Masjid masonry, yellow-black kerb). 100% commercial packaging removal verified.',
+    vlm_confidence: 0.99,
+    landmark_matches: [
+      {
+        landmark: 'Mecca Masjid outer gateway arch',
+        before_pos: 'Left background',
+        after_pos: 'Left background',
+        matched: true,
+      },
+      {
+        landmark: 'Charminar minaret and central arch',
+        before_pos: 'Upper right background',
+        after_pos: 'Upper right background',
+        matched: true,
+      },
+      {
+        landmark: 'Yellow-black street curb line',
+        before_pos: 'Foreground edge (cluttered)',
+        after_pos: 'Foreground edge (spotless)',
+        matched: true,
+      },
+    ],
+    payout_status: 'AUTHORIZED',
+    payout_amount_inr: 4200,
+    created_at: new Date(Date.now() - 2 * 3600 * 1000).toISOString(),
+  },
+  // 2. Legitimate Verified Clearance for REP-DEL-05 (Lajpat Nagar Central Market)
+  {
+    id: 'PRF-VERIFIED-DEL-05',
+    report_id: 'REP-DEL-05',
+    after_image_url: '/demo/lajpat-clean.jpg',
+    worker_id: 'WRK-3094',
+    worker_name: 'Sukhvinder Pal Singh',
+    contractor_name: 'Capital Municipal Concessionaire Ltd',
+    lat: 28.56722, // 4.8 meters offset
+    lng: 77.24335,
+    photo_timestamp: new Date(Date.now() - 6 * 3600 * 1000).toISOString(),
+    gps_distance_meters: 4.8,
+    is_verified: true,
+    verification_status: 'VERIFIED',
+    verification_reason:
+      'GPS coordinates match within 4.8m. Gemini VLM verified market retail storefront signage (Sharma General Store, Gupta Cloth House) and curbside geometry. Complete organic waste evacuation verified.',
+    vlm_confidence: 0.98,
+    landmark_matches: [
+      {
+        landmark: 'Sharma General Store and Gupta Cloth House signboards',
+        before_pos: 'Upper left commercial facade',
+        after_pos: 'Upper left commercial facade',
+        matched: true,
+      },
+      {
+        landmark: 'Galaxy Electronics and fresh fruit shop fascia',
+        before_pos: 'Center upper row',
+        after_pos: 'Center upper row',
+        matched: true,
+      },
+      {
+        landmark: 'Concrete market perimeter pedestrian curb',
+        before_pos: 'Lower left (covered with crates)',
+        after_pos: 'Lower left (swept spotless)',
+        matched: true,
+      },
+    ],
+    payout_status: 'AUTHORIZED',
+    payout_amount_inr: 5800,
+    created_at: new Date(Date.now() - 6 * 3600 * 1000).toISOString(),
+  },
+  // 3. Legitimate Verified Clearance for REP-BLR-03 (Indiranagar)
   {
     id: 'PRF-VERIFIED-01',
     report_id: 'REP-BLR-03',
@@ -231,7 +312,7 @@ export const INITIAL_CLEARANCE_PROOFS: ClearanceProof[] = [
     payout_amount_inr: 3200,
     created_at: new Date(Date.now() - 4 * 3600 * 1000).toISOString(),
   },
-  // 2. Caught Fraud Attempt for REP-BLR-04 (GPS Mismatch: photo taken 3.4 km away!)
+  // 4. Caught Fraud Attempt for REP-BLR-04 (GPS Mismatch: photo taken 3.4 km away!)
   {
     id: 'PRF-FRAUD-02',
     report_id: 'REP-BLR-04',

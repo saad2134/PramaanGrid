@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   ShieldCheck,
   ShieldAlert,
@@ -33,15 +33,18 @@ export default function ProofVerifier({
     existingProof || null
   );
 
+  useEffect(() => {
+    setCurrentProof(existingProof || null);
+  }, [report.id, existingProof]);
+
   const SCENARIOS = {
     legit: {
-      title: 'Legitimate Onsite Cleanup (Hyderabad Ward 98)',
-      afterUrl:
-        'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=900&q=80',
+      title: `Legitimate Onsite Cleanup (${report.ward})`,
+      afterUrl: report.ai_clean_image_url || '/demo/banjara-clean.jpg',
       lat: report.lat + 0.00006, // ~6.8 meters away
       lng: report.lng + 0.00005,
-      workerName: 'Rameshwarappa Gowda',
-      contractorName: 'Deccan CleanTech Operations Pvt Ltd',
+      workerName: report.assigned_contractor ? `${report.assigned_contractor} Field Team` : 'Rameshwarappa Gowda',
+      contractorName: report.assigned_contractor || 'Deccan CleanTech Operations Pvt Ltd',
       amountInr: 4500,
     },
     fraud: {
@@ -162,12 +165,12 @@ export default function ProofVerifier({
         <div className="flex flex-col rounded-xl overflow-hidden bg-zinc-950 border border-zinc-800">
           <div className="flex items-center justify-between bg-zinc-900/80 px-3 py-2 text-xs border-b border-zinc-800">
             <span className="font-semibold text-cyan-400 flex items-center gap-1.5">
-              <span>🔵 AFTER (Contractor Submission)</span>
+              <span>🔵 AFTER ({currentProof ? 'Contractor Submission' : 'Clean State Vision'})</span>
             </span>
             <span className="text-[10px] text-zinc-400 font-mono">
               {currentProof
                 ? `GPS: ${currentProof.lat.toFixed(4)}, ${currentProof.lng.toFixed(4)}`
-                : 'Awaiting audit...'}
+                : 'AI Clean State Projection'}
             </span>
           </div>
           <div className="relative h-56 w-full bg-black flex items-center justify-center">
@@ -182,6 +185,18 @@ export default function ProofVerifier({
                 alt="After cleanup"
                 className="h-full w-full object-cover"
               />
+            ) : report.ai_clean_image_url ? (
+              <div className="relative h-full w-full">
+                <img
+                  src={report.ai_clean_image_url}
+                  alt="AI Clean Vision"
+                  className="h-full w-full object-cover"
+                />
+                <div className="absolute top-2 right-2 rounded-md bg-emerald-950/80 border border-emerald-500/40 px-2 py-0.5 text-[10px] font-semibold text-emerald-300 backdrop-blur-xs flex items-center gap-1">
+                  <Sparkles className="h-3 w-3" />
+                  <span>Vision of Tomorrow</span>
+                </div>
+              </div>
             ) : (
               <div className="text-center p-4 text-zinc-500 text-xs">
                 Click "Simulate Real Cleanup" or "Simulate Fraud Attempt" to execute live audit.

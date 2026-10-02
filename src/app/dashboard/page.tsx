@@ -22,11 +22,12 @@ import {
   Sparkles,
   ExternalLink,
 } from 'lucide-react';
-import { Report, CivicMetrics, ReportStatus, ReportCategory } from '@/types';
-import { INITIAL_METRICS, INITIAL_REPORTS } from '@/lib/demo-data';
+import { Report, CivicMetrics, ReportStatus, ReportCategory, ClearanceProof } from '@/types';
+import { INITIAL_METRICS, INITIAL_REPORTS, INITIAL_CLEARANCE_PROOFS } from '@/lib/demo-data';
 
 export default function DashboardPage() {
   const [reports, setReports] = useState<Report[]>(INITIAL_REPORTS);
+  const [proofs, setProofs] = useState<ClearanceProof[]>(INITIAL_CLEARANCE_PROOFS);
   const [metrics, setMetrics] = useState<CivicMetrics>(INITIAL_METRICS);
   const [selectedReport, setSelectedReport] = useState<Report>(INITIAL_REPORTS[0]);
   const [statusFilter, setStatusFilter] = useState<string>('ALL');
@@ -43,6 +44,7 @@ export default function DashboardPage() {
       if (json.success && json.data) {
         setReports(json.data);
         if (json.metrics) setMetrics(json.metrics);
+        if (json.proofs) setProofs(json.proofs);
       }
     } catch (e) {
       console.error('Failed to fetch dashboard reports:', e);
@@ -229,13 +231,37 @@ export default function DashboardPage() {
                         : 'bg-zinc-900/40 border-zinc-800 hover:bg-zinc-900 hover:border-zinc-700'
                     }`}
                   >
-                    {/* Thumbnail */}
-                    <div className="h-16 w-16 shrink-0 rounded-lg overflow-hidden bg-black border border-zinc-800">
-                      <img
-                        src={r.original_image_url}
-                        alt="Thumbnail"
-                        className="h-full w-full object-cover"
-                      />
+                    {/* Before & After Thumbnails */}
+                    <div className="flex items-center gap-1.5 shrink-0">
+                      {/* Before Thumbnail */}
+                      <div className="relative h-16 w-16 rounded-lg overflow-hidden bg-black border border-zinc-800">
+                        <img
+                          src={r.original_image_url}
+                          alt={`#${r.id} Before`}
+                          className="h-full w-full object-cover"
+                        />
+                        <span className="absolute bottom-0 inset-x-0 bg-black/75 backdrop-blur-xs text-[8px] font-bold text-amber-400 text-center py-0.5 uppercase tracking-wider">
+                          Before
+                        </span>
+                      </div>
+
+                      {/* After / Cleaned Thumbnail */}
+                      {r.ai_clean_image_url && (
+                        <div className="relative h-16 w-16 rounded-lg overflow-hidden bg-black border border-zinc-800 hidden sm:block">
+                          <img
+                            src={r.ai_clean_image_url}
+                            alt={`#${r.id} After`}
+                            className="h-full w-full object-cover"
+                          />
+                          <span
+                            className={`absolute bottom-0 inset-x-0 bg-black/75 backdrop-blur-xs text-[8px] font-bold text-center py-0.5 uppercase tracking-wider ${
+                              r.status === 'RESOLVED' ? 'text-emerald-400' : 'text-cyan-400'
+                            }`}
+                          >
+                            {r.status === 'RESOLVED' ? 'Cleaned' : 'Vision'}
+                          </span>
+                        </div>
+                      )}
                     </div>
 
                     {/* Details */}
@@ -305,6 +331,7 @@ export default function DashboardPage() {
             {/* Proof-of-Clearance Forensic Terminal for Selected Report */}
             <ProofVerifier
               report={selectedReport}
+              existingProof={proofs.find((p) => p.report_id === selectedReport.id)}
               onVerified={fetchReports}
             />
           </div>

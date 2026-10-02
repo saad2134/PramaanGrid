@@ -24,10 +24,12 @@ export async function GET(request: NextRequest) {
     }
 
     const metrics = store.getMetrics();
+    const proofs = store.getProofs();
 
     return NextResponse.json({
       success: true,
       data: reports,
+      proofs,
       metrics,
     });
   } catch (error) {

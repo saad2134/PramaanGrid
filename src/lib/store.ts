@@ -12,11 +12,27 @@ class DataStore {
   private metrics: CivicMetrics = { ...INITIAL_METRICS };
 
   getReports(): Report[] {
+    // Keep demo reports synchronized with latest static assets
+    INITIAL_REPORTS.forEach((initRep) => {
+      const existing = this.reports.find((r) => r.id === initRep.id);
+      if (existing) {
+        existing.original_image_url = initRep.original_image_url;
+        existing.ai_clean_image_url = initRep.ai_clean_image_url;
+        existing.status = initRep.status;
+        existing.severity = initRep.severity;
+        existing.address = initRep.address;
+        existing.ward = initRep.ward;
+        existing.description = initRep.description;
+        if (initRep.resolved_at) existing.resolved_at = initRep.resolved_at;
+      } else {
+        this.reports.push(initRep);
+      }
+    });
     return [...this.reports];
   }
 
   getReportById(id: string): Report | undefined {
-    return this.reports.find((r) => r.id === id);
+    return this.getReports().find((r) => r.id === id);
   }
 
   addReport(report: Report): Report {
@@ -50,6 +66,15 @@ class DataStore {
   }
 
   getProofs(): ClearanceProof[] {
+    // Keep demo proofs synchronized with latest static assets
+    INITIAL_CLEARANCE_PROOFS.forEach((initProof) => {
+      const existingIdx = this.proofs.findIndex((p) => p.id === initProof.id || p.report_id === initProof.report_id);
+      if (existingIdx >= 0) {
+        this.proofs[existingIdx] = initProof;
+      } else {
+        this.proofs.push(initProof);
+      }
+    });
     return [...this.proofs];
   }
 
@@ -89,10 +114,4 @@ class DataStore {
   }
 }
 
-// Global singleton to preserve state across API routes in dev mode
-const globalStore = global as unknown as { __pramaanGridStore?: DataStore };
-
-export const store = globalStore.__pramaanGridStore || new DataStore();
-if (process.env.NODE_ENV !== 'production') {
-  globalStore.__pramaanGridStore = store;
-}
+export const store = new DataStore();
