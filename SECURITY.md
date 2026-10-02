@@ -8,10 +8,10 @@ The PramaanGrid team takes the security of civic infrastructure, municipal escro
 
 Only the latest release and the current `master` branch receive security patches and updates:
 
-| Version | Supported          |
-| ------- | ------------------ |
-| 1.0.x   | :white_check_mark: |
-| < 1.0   | :x:                |
+| Version | Supported |
+| ------- | --------- |
+| 1.0.x   | ✅ Yes    |
+| < 1.0   | ❌ No     |
 
 ---
 
