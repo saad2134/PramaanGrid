@@ -81,14 +81,18 @@ function LeafletMapInner({
         zoomControl: true,
       });
 
-      // CartoDB DarkMatter Tiles
+      // CartoDB DarkMatter Tiles with authenticated API key
+      const cartoKey =
+        process.env.NEXT_PUBLIC_CARTO_API_KEY ||
+        'cb1_47vt_1_aac8885d7563bb7ed0120fbd';
+
       L.tileLayer(
-        'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',
+        `https://{s}.basemaps.cartocdn.com/rastertiles/dark_all/{z}/{x}/{y}{r}.png?key=${cartoKey}`,
         {
           attribution:
             '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
           subdomains: 'abcd',
-          maxZoom: 19,
+          maxZoom: 20,
         }
       ).addTo(map);
 
