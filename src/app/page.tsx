@@ -158,22 +158,6 @@ export default function Home() {
                     <ArrowUpRight className="h-3.5 w-3.5 text-zinc-400 group-hover:text-emerald-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
                   </a>
                 </div>
-
-                {/* Key Protocol Guarantees (replaces duplicate mini stats) */}
-                <div className="mt-7 pt-5 border-t border-white/[0.08] flex flex-wrap items-center gap-x-6 gap-y-2 text-xs text-zinc-400">
-                  <div className="flex items-center gap-1.5">
-                    <span className="flex h-1.5 w-1.5 rounded-full bg-emerald-400" />
-                    <span>Zero citizen app download</span>
-                  </div>
-                  <div className="flex items-center gap-1.5">
-                    <span className="flex h-1.5 w-1.5 rounded-full bg-rose-400" />
-                    <span>Cryptographic contractor escrow</span>
-                  </div>
-                  <div className="flex items-center gap-1.5">
-                    <span className="flex h-1.5 w-1.5 rounded-full bg-cyan-400" />
-                    <span>Free &amp; Open Source (GPL v3)</span>
-                  </div>
-                </div>
               </div>
 
               {/* RIGHT COLUMN: Interactive Live Forensic Audit Card */}
