@@ -1,4 +1,4 @@
-# 🏆 PramaanGrid (प्रमाण-�-्रिड) — The Civic Trust Protocol
+# ♻️ PramaanGrid (प्रमाण-�-्रिड) — The Civic Trust Protocol
 ### *The Anti-Fraud Proof-of-Clearance Protocol for Civic Operations*
 
 [![Next.js 16](https://img.shields.io/badge/Next.js-16.3.8-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
